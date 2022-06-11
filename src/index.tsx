@@ -12,15 +12,15 @@ useLayout().setupLayoutAnimation();
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaProvider>
-          <NativeBaseProvider theme={themes}>
+    <NativeBaseProvider theme={themes}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <SafeAreaProvider>
             <Router />
-          </NativeBaseProvider>
-        </SafeAreaProvider>
-      </PersistGate>
-    </Provider>
+          </SafeAreaProvider>
+        </PersistGate>
+      </Provider>
+    </NativeBaseProvider>
   );
 }
 export default App;

@@ -1,4 +1,4 @@
-import { isEmpty } from '../generic';
+import { isEmpty } from '../../src/utils/generic';
 
 describe('isEmpty test', () => {
   it('value is null', () => {
