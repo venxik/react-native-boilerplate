@@ -1,6 +1,6 @@
 {
   "name": "boilerplate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "prepare": "husky install",
@@ -21,7 +21,6 @@
     "lint:fix": "eslint --ext .tsx --ext .ts src/ --fix",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
-    "typescript": "tsc --project tsconfig.json",
     "start:staging": "MY_ENV=development npx react-native start --reset-cache",
     "start:release": "MY_ENV=production npx react-native start --reset-cache"
   },
