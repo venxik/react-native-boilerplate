@@ -8,6 +8,6 @@ beforeEach(setupTimeTravel);
 describe('Testing App ', () => {
   test('should render App correctly', () => {
     renderer.create(<App />);
-    timeTravel(1000);
+    timeTravel(2000);
   });
 });
