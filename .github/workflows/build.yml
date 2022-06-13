@@ -23,11 +23,11 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: yarn install
+      # - name: Install dependencies
+      #   run: yarn install
 
-      - name: Test and coverage
-        run: yarn test:cov
+      # - name: Test and coverage
+      #   run: yarn test:cov
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
