@@ -1,4 +1,4 @@
-import { heightPercentageToDP, widthPercentageToDP } from '../normalize';
+import { heightPercentageToDP, widthPercentageToDP } from '../src/utils/normalize';
 
 describe('normalize test', () => {
   it('return number', () => {

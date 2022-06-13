@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from '..';
-import timeTravel, { setupTimeTravel } from '../../__mocks__/timeTravel';
+import App from '../src';
+import timeTravel, { setupTimeTravel } from '../__mocks__/timeTravel';
 
 beforeEach(setupTimeTravel);
 
