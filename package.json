@@ -23,7 +23,8 @@
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
     "start:staging": "MY_ENV=development npx react-native start --reset-cache",
-    "start:release": "MY_ENV=production npx react-native start --reset-cache"
+    "start:release": "MY_ENV=production npx react-native start --reset-cache",
+    "beta:android": "cd ./android && fastlane beta"
   },
   "dependencies": {
     "@jest/globals": "^28.1.0",
