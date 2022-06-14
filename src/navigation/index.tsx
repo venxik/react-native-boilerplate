@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme, AddIcon } from 'native-base';
-import { Home, Setting, SignIn, Splash } from '../screens';
+import { Home, Setting, SignIn, SignUp, Splash } from '../screens';
 import { NavigationContainer } from '@react-navigation/native';
 
 const SignInStack = createNativeStackNavigator<ReactNavigation.SignInStackParamList>();
@@ -10,6 +10,7 @@ export function SignInStackNavigator() {
   return (
     <SignInStack.Navigator initialRouteName="SignInScreen" screenOptions={{ headerShown: false }}>
       <SignInStack.Screen name="SignInScreen" component={SignIn} />
+      <SignInStack.Screen name="SignUpScreen" component={SignUp} />
       <SignInStack.Screen name="HomeTabNavigator" component={HomeTabNavigator} />
     </SignInStack.Navigator>
   );

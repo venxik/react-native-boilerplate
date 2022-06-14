@@ -8,13 +8,14 @@ import {
   KeyboardAvoidingView,
   Text,
   useTheme,
+  View,
   WarningIcon,
   WarningTwoIcon,
 } from 'native-base';
 import { useSignIn } from './hook';
 
 export default function SignIn(): JSX.Element {
-  const { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome } = useSignIn();
+  const { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome, goToSignUp } = useSignIn();
   const { colors } = useTheme();
 
   return (
@@ -64,6 +65,14 @@ export default function SignIn(): JSX.Element {
           <Button onPress={goToHome} variant={'solid'} size={'lg'} testID="btn-submit">
             Login
           </Button>
+          <View flexDirection={'row'} mt={30}>
+            <Text fontSize={'md'} color={'blue.500'} mr={1}>
+              Don't have account?
+            </Text>
+            <Text fontSize={'md'} color={'blue.500'} onPress={goToSignUp}>
+              Register
+            </Text>
+          </View>
         </Center>
       </KeyboardAvoidingView>
     </Box>
