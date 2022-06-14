@@ -22,12 +22,14 @@ export default function Home(): JSX.Element {
         size="sm"
       >
         <Button
+          testID="btn-users"
           variant={selectedData == 'users' ? 'solid' : 'outline'}
           onPress={() => setSelectedData('users')}
         >
           Users
         </Button>
         <Button
+          testID="btn-products"
           variant={selectedData == 'products' ? 'solid' : 'outline'}
           onPress={() => setSelectedData('products')}
         >

@@ -24,26 +24,44 @@ export default function SignIn(): JSX.Element {
           <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
             SignIn
           </Text>
-          <Input p={4} placeholder="Type Email" keyboardType="email-address" mb="10" />
+          <Input
+            p={4}
+            placeholder="Type Email"
+            keyboardType="email-address"
+            mb="10"
+            testID="input-email"
+          />
           <Input
             p={4}
             placeholder="Type Password"
             secureTextEntry={hidePassword}
             mb="10"
+            testID="input-password"
             InputRightElement={
               <IconButton
+                testID="hide-password"
                 onPress={onToggleHidePassword}
                 icon={
                   hidePassword ? (
-                    <WarningIcon name={'warning-1'} color={colors.black} size={6} />
+                    <WarningIcon
+                      name={'warning-1'}
+                      color={colors.black}
+                      size={6}
+                      testID="icon-hide"
+                    />
                   ) : (
-                    <WarningTwoIcon name={'warning-2'} color={colors.black} size={6} />
+                    <WarningTwoIcon
+                      name={'warning-2'}
+                      color={colors.black}
+                      size={6}
+                      testID="icon-show"
+                    />
                   )
                 }
               />
             }
           />
-          <Button onPress={goToHome} variant={'solid'} size={'lg'}>
+          <Button onPress={goToHome} variant={'solid'} size={'lg'} testID="btn-submit">
             Login
           </Button>
         </Center>

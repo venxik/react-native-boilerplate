@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import logger from 'redux-logger';
@@ -21,11 +19,7 @@ import { rootPersistConfig, rootReducer } from './rootReducer';
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-let createDebugger: (() => any) | null = null;
-
-if (__DEV__ && !process.env.JEST_WORKER_ID) {
-  createDebugger = require('redux-flipper').default;
-}
+const createDebugger: (() => any) | null = null;
 
 const store = configureStore({
   reducer: persistReducer(rootPersistConfig, rootReducer),
@@ -38,7 +32,8 @@ const store = configureStore({
         })
           .concat(combinedMiddleware)
           .concat(logger)
-          .concat(createDebugger?.())
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          .concat(createDebugger!())
       : getDefaultMiddleware({
           serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

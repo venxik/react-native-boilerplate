@@ -6,21 +6,17 @@ import { Home, Setting, SignIn, Splash } from '../screens';
 import { NavigationContainer } from '@react-navigation/native';
 
 const SignInStack = createNativeStackNavigator<ReactNavigation.SignInStackParamList>();
-function SignInStackNavigator() {
+export function SignInStackNavigator() {
   return (
     <SignInStack.Navigator initialRouteName="SignInScreen" screenOptions={{ headerShown: false }}>
       <SignInStack.Screen name="SignInScreen" component={SignIn} />
-      <SignInStack.Screen
-        name="HomeTabNavigator"
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        component={HomeTabNavigator}
-      />
+      <SignInStack.Screen name="HomeTabNavigator" component={HomeTabNavigator} />
     </SignInStack.Navigator>
   );
 }
 
 const SettingStack = createNativeStackNavigator<ReactNavigation.SettingStackParamList>();
-function SettingStackNavigator() {
+export function SettingStackNavigator() {
   return (
     <SettingStack.Navigator initialRouteName="SettingScreen" screenOptions={{ headerShown: false }}>
       <SettingStack.Screen name="SettingScreen" component={Setting} />
@@ -29,7 +25,7 @@ function SettingStackNavigator() {
 }
 
 const HomeTab = createBottomTabNavigator<ReactNavigation.HomeTabParamList>();
-function HomeTabNavigator() {
+export function HomeTabNavigator() {
   const theme = useTheme();
   const { colors } = theme;
 
@@ -69,18 +65,18 @@ function HomeTabNavigator() {
   );
 }
 
-const SpashStack = createNativeStackNavigator();
-function SplashNavigator() {
+const SplashStack = createNativeStackNavigator();
+export function SplashNavigator() {
   return (
-    <SpashStack.Navigator initialRouteName="SplashScreen">
-      <SpashStack.Screen
+    <SplashStack.Navigator initialRouteName="SplashScreen">
+      <SplashStack.Screen
         name="SplashScreen"
         component={Splash}
         options={{
           headerShown: false,
         }}
       />
-    </SpashStack.Navigator>
+    </SplashStack.Navigator>
   );
 }
 

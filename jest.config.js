@@ -8,7 +8,7 @@ module.exports = {
   testPathIgnorePatterns: ['\\.snap$', '<rootDir>/node_modules/'],
   // transformIgnorePatterns: ['node_modules/?!(static-container)'],
   transformIgnorePatterns: [
-    'node_modules/(?!@react-native|react-native|react-navigation|react-navigation-redux-helpers|@react-navigation/.*|@react-native-community/.*|native-base/.*)',
+    'node_modules/(?!(jest-)?@?react-native|react-native|@react-navigation/.*|@react-native-community/.*|native-base/.*)',
   ],
   // cacheDirectory: '.jest/cache',
   // globals: {
