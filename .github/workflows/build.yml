@@ -9,15 +9,28 @@ jobs:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code into directory
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
+      # - name: Cache node_modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/.npm
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #     restore-key: |
+      #       ${{ runner.os }}-node-
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn
 
-      - name: run unit test
-        run: yarn test
+      - name: Test and coverage
+        run: yarn test:cov
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

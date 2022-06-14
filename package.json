@@ -1,29 +1,26 @@
 {
   "name": "boilerplate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "android": "react-native run-android",
-    "android:run": "ENVFILE=.env.development react-native run-android",
-    "android:run:local": "adb reverse tcp:5001 tcp:5001 && ENVFILE=.env.local react-native run-android",
-    "android:run:demo": "ENVFILE=.env.demo react-native run-android",
-    "android:run:staging": "ENVFILE=.env.staging react-native run-android",
-    "android:run:release": "ENVFILE=.env.production react-native run-android --variant=release",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
+    "run:android": "npx react-native run-android",
+    "release:android": "cd android && ./gradlew assembleRelease",
+    "run:ios": "npx react-native run-ios",
+    "start": "react-native start --reset-cache",
     "release": "standard-version",
-    "test": "jest --verbose --coverage",
+    "test": "jest --verbose",
+    "test:cov": "jest --verbose --coverage",
     "test:update": "jest --verbose --coverage --updateSnapshot",
     "test:watch": "jest --verbose --watch",
-    "coverage": "jest --verbose --coverage && open ./coverage/lcov-report/index.html",
+    "test:coverage": "jest --verbose --coverage && open ./coverage/lcov-report/index.html",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx src/",
     "lint:fix": "eslint --ext .tsx --ext .ts src/ --fix",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
-    "typescript": "tsc --project tsconfig.json",
-    "start:staging": "MY_ENV=development npx react-native start --reset-cache",
-    "start:release": "MY_ENV=production npx react-native start --reset-cache"
+    "start:staging": "NODE_ENV=development npx react-native start --reset-cache",
+    "start:release": "NODE_ENV=production npx react-native start --reset-cache",
+    "beta:android": "cd ./android && fastlane beta"
   },
   "dependencies": {
     "@jest/globals": "^28.1.0",
@@ -36,7 +33,7 @@
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "@react-navigation/stack": "^6.2.1",
-    "@reduxjs/toolkit": "^1.8.1",
+    "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "i18next": "^21.8.4",
     "native-base": "^3.4.6",
@@ -66,6 +63,7 @@
     "@commitlint/config-conventional": "^17.0.2",
     "@jest/types": "^28.1.0",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/react-hooks": "^8.0.0",
     "@testing-library/react-native": "^9.1.0",
     "@types/jest": "^26.0.24",
     "@types/react-native": "^0.67.3",
@@ -94,7 +92,8 @@
     "redux-flipper": "^2.0.1",
     "standard-version": "^9.5.0",
     "ts-jest": "^28.0.3",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.2",
+    "whatwg-fetch": "^3.6.2"
   },
   "resolutions": {
     "@types/react": "^17"
