@@ -1,6 +1,9 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 
+// Apply the Firebase Crashlytics Plugin
+apply plugin: 'com.google.firebase.crashlytics'
+
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -241,6 +244,12 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            // Enable Crashlytics NDK reporting
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+            }
         }
     }
 

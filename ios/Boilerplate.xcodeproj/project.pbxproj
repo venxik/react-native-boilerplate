@@ -39,6 +39,7 @@
 		9D71B37859D349C1BB76A5CC /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8923756D401C4871957C5EA8 /* Poppins-ExtraLightItalic.ttf */; };
 		C39B60BA391546C0874E7940 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E749D7DEDD1F45179B0CDF80 /* OpenSans-Regular.ttf */; };
 		C6CB1D6F9DB44FF3936C22C3 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1090DC4BAF0C492A9B1ACE6A /* Poppins-Italic.ttf */; };
+		D16732472858BF21002DD58B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D16732462858BF21002DD58B /* GoogleService-Info.plist */; };
 		DAB5B7C4C29244B0A1A79B45 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CBD99DA834F35AFC09CF3 /* OpenSans-ExtraBold.ttf */; };
 		E28FD66F3D6A42AC9567894B /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7405B1BBA740CE80A95AF3 /* OpenSans-Italic.ttf */; };
 		E6480E10575C44DEA2C96428 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05017DF67E584A8FA913B8F0 /* OpenSans-SemiBold.ttf */; };
@@ -97,6 +98,7 @@
 		BE198A38D7694D589A7AB72E /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../src/assets/fonts/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		CB1CE60E53074420847D2AF4 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		CBF2758863D74B72873ED0D0 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		D16732462858BF21002DD58B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D96F43CF35AD47AAA6ABC00A /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		DEF2D8EB1C4B4040B29A62BE /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		E5232E03B6374507A48D9032 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../src/assets/fonts/Poppins/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		13B07FAE1A68108700A75B9A /* Boilerplate */ = {
 			isa = PBXGroup;
 			children = (
+				D16732462858BF21002DD58B /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -285,6 +288,7 @@
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
 				8F58C8A4870A3BA204CCCF72 /* [CP-User] [RNFB] Core Configuration */,
+				60B742A3B2326B38B3AE580C /* [CP-User] [RNFB] Crashlytics Configuration */,
 			);
 			buildRules = (
 			);
@@ -351,6 +355,7 @@
 				32C5BBFA274A4ECF864CF76B /* Poppins-BoldItalic.ttf in Resources */,
 				7B7E7843765342D1B3F7A976 /* Poppins-ExtraBold.ttf in Resources */,
 				769ECE8405EC4563B4CE725D /* Poppins-ExtraBoldItalic.ttf in Resources */,
+				D16732472858BF21002DD58B /* GoogleService-Info.plist in Resources */,
 				8F180453E778430BB34320A8 /* Poppins-ExtraLight.ttf in Resources */,
 				9D71B37859D349C1BB76A5CC /* Poppins-ExtraLightItalic.ttf in Resources */,
 				C6CB1D6F9DB44FF3936C22C3 /* Poppins-Italic.ttf in Resources */,
@@ -411,6 +416,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Boilerplate/Pods-Boilerplate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		60B742A3B2326B38B3AE580C /* [CP-User] [RNFB] Crashlytics Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Crashlytics Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\nif [[ ${PODS_ROOT} ]]; then\n  echo \"info: Exec FirebaseCrashlytics Run from Pods\"\n  \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n  echo \"info: Exec FirebaseCrashlytics Run from framework\"\n  \"${PROJECT_DIR}/FirebaseCrashlytics.framework/run\"\nfi\n";
 		};
 		8F58C8A4870A3BA204CCCF72 /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -628,6 +647,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Boilerplate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -639,7 +659,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.finetiks.rnboilerplate;
 				PRODUCT_NAME = Boilerplate;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -654,6 +674,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Boilerplate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -664,7 +685,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.finetiks.rnboilerplate;
 				PRODUCT_NAME = Boilerplate;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
