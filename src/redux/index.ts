@@ -23,22 +23,27 @@ import { rootPersistConfig, rootReducer } from './rootReducer';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let createDebugger: (() => any) | null = null;
 
-if (__DEV__) {
+if (__DEV__ && !process.env.JEST_WORKER_ID) {
   createDebugger = require('redux-flipper').default;
 }
 
 const store = configureStore({
   reducer: persistReducer(rootPersistConfig, rootReducer),
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    })
-      .concat(combinedMiddleware)
-      /* eslint-disable @typescript-eslint/no-non-null-assertion */
-      .concat(createDebugger!())
-      .concat(logger),
+    __DEV__ && !process.env.JEST_WORKER_ID
+      ? getDefaultMiddleware({
+          serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          },
+        })
+          .concat(combinedMiddleware)
+          .concat(logger)
+          .concat(createDebugger?.())
+      : getDefaultMiddleware({
+          serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          },
+        }).concat(combinedMiddleware),
 });
 
 const persistor = persistStore(store);

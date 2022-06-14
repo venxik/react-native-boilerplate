@@ -1,4 +1,4 @@
-import * as fonts from '../src/theme/fonts';
+import * as fonts from '../fonts';
 
 it('fonts', () => {
   expect(fonts).toBeTruthy();

@@ -1,4 +1,4 @@
-import useLayout from '../src/hooks/useLayout';
+import useLayout from '../useLayout';
 
 jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
   get: jest.fn().mockReturnValue({ width: 414, height: 896 }),

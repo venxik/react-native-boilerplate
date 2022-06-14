@@ -1,4 +1,4 @@
-import * as components from '../src/theme/components';
+import * as components from '../components';
 
 describe('Components Native Base', () => {
   it('Button', () => {

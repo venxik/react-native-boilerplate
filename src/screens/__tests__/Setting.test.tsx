@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import Setting from '../src/screens/Setting';
+import Setting from '../Setting';
 
 describe('Setting screen', () => {
   it('Render Setting screen', () => {
