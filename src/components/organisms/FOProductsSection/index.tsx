@@ -20,9 +20,7 @@ export default function FOProductsSection({ query }: IFOProductsSectionProps) {
   return (
     <Box flex={1} height={'100%'}>
       {isFetching ? (
-        <Text justifyItems={'center'} alignSelf="center">
-          Loading
-        </Text>
+        <Text alignSelf="center">Loading</Text>
       ) : data && data?.products.length > 0 ? (
         <ScrollView flex={1} p={'4'}>
           {data?.products?.map((v: IProductsDetail) => (
@@ -30,9 +28,7 @@ export default function FOProductsSection({ query }: IFOProductsSectionProps) {
           ))}
         </ScrollView>
       ) : (
-        <Text justifyItems={'center'} alignSelf={'center'}>
-          No data
-        </Text>
+        <Text alignSelf={'center'}>No data</Text>
       )}
     </Box>
   );
