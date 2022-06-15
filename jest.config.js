@@ -3,21 +3,28 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   testPathIgnorePatterns: ['\\.snap$', '<rootDir>/node_modules/'],
   // transformIgnorePatterns: ['node_modules/?!(static-container)'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/theme/',
+    '<rootDir>/src/services/',
+    '<rootDir>/src/config/',
+    '<rootDir>/src/global/',
+    '<rootDir>/src/navigation/',
+  ],
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?@react-native|react-native|react-navigation|react-navigation-redux-helpers|@react-navigation/.*|@react-native-community/.*|native-base)',
+    'node_modules/(?!(jest-)?@?react-native|react-native|@react-navigation/.*|@react-native-community/.*|native-base/.*)',
   ],
   // cacheDirectory: '.jest/cache',
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
-  },
+  // globals: {
+  //   'ts-jest': {
+  //     isolatedModules: true,
+  //   },
+  // },
   clearMocks: true,
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/node_modules/**'],
   coverageDirectory: '.coverage',
 };

@@ -17,6 +17,8 @@ module.exports = {
     'no-unused-vars': 2,
     'no-param-reassign': 2,
     'no-restricted-imports': 2,
+    'no-use-before-define': 0,
+    '@typescript-eslint/no-use-before-define': 0,
     'prettier/prettier': [
       'error',
       {

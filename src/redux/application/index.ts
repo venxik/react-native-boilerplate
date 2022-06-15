@@ -25,22 +25,22 @@ const slice = createSlice({
     },
 
     // ON CHANGE THEME
-    onChangeTheme(state: ApplicationSlice.IState, action: ApplicationSlice.IAction) {
+    onChangeTheme(state: ApplicationSlice.IState, action: PayloadAction<string>) {
       state.theme = action?.payload;
     },
 
     // ON FORCE THEME
-    onForceTheme(state: ApplicationSlice.IState, action: ApplicationSlice.IAction) {
+    onForceTheme(state: ApplicationSlice.IState, action: PayloadAction<boolean>) {
       state.force_dark = action?.payload;
     },
 
     // ON CHANGE FONT
-    onChangeFont(state: ApplicationSlice.IState, action: ApplicationSlice.IAction) {
+    onChangeFont(state: ApplicationSlice.IState, action: PayloadAction<string>) {
       state.font = action?.payload;
     },
 
     // ON CHANGE LANGUAGE
-    onChangeLanguage(state: ApplicationSlice.IState, action: ApplicationSlice.IAction) {
+    onChangeLanguage(state: ApplicationSlice.IState, action: PayloadAction<string>) {
       state.language = action?.payload;
     },
   },

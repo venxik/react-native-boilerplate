@@ -156,7 +156,7 @@ export default function useLayout() {
     return Dimensions.get('window').height;
   };
 
-  const scrollEnabled = (contentWidth: number, contentHeight: number): boolean => {
+  const scrollEnabled = (contentHeight: number): boolean => {
     return contentHeight > Dimensions.get('window').height - heightHeader();
   };
 

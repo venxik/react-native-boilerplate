@@ -11,7 +11,7 @@ export interface IProductsDetail {
   stock: number;
   brand: string;
   category: string;
-  thumbnail: unknown;
+  thumbnail: string;
   images: string[];
 }
 
@@ -43,37 +43,16 @@ export const productsAPI = createApi({
     //     );
     //   },
     // }),
-    refetchProducts: builder.mutation<null, void>({
-      // The query is not relevant here, so a `null` returning `queryFn` is used
-      queryFn: () => ({ data: null }),
-      // This mutation takes advantage of tag invalidation behaviour to trigger
-      // any queries that provide the 'Post' or 'User' tags to re-fetch if the queries
-      // are currently subscribed to the cached data
-      invalidatesTags: ['Products'],
-    }),
-    // searchProduct: builder.mutation<any, string>({
-    //   query: (query) => ({
-    //     url: `/products/?q=${encodeURIComponent(query)}`,
-    //     method: 'GET',
-    //   }),
+    // refetchProducts: builder.mutation<null, void>({
+    //   // The query is not relevant here, so a `null` returning `queryFn` is used
+    //   queryFn: () => ({ data: null }),
+    //   // This mutation takes advantage of tag invalidation behaviour to trigger
+    //   // any queries that provide the 'Post' or 'User' tags to re-fetch if the queries
+    //   // are currently subscribed to the cached data
     //   invalidatesTags: ['Products'],
-    // }),
-    // getBankList: builder.mutation({
-    //   query: () => ({
-    //     url: '/institutions',
-    //     method: 'GET',
-    //     transformResponse: (response) => response.data,
-    //   }),
-    // }),
-    // postAccount: builder.mutation({
-    //   query: (body = {}) => ({
-    //     url: '/addAccount',
-    //     method: 'POST',
-    //     body,
-    //   }),
     // }),
   }),
 });
 
-export const { useGetProductQuery, useRefetchProductsMutation } = productsAPI;
+export const { useGetProductQuery } = productsAPI;
 export const productsQueryReducer = { [reducerPath]: productsAPI.reducer };
