@@ -1,6 +1,6 @@
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { wrapper } from '../../__mocks__/wrapper';
+import { render } from '../../__mocks__/wrapper';
 import SignUp from '../SignUp';
 
 const mockedNavigate = jest.fn();
@@ -18,7 +18,7 @@ describe('SignUp screen', () => {
     passwordConfirmation: 'test123',
   };
   it('should can input form', async () => {
-    const rendered = render(<SignUp />, { wrapper });
+    const rendered = render(<SignUp />);
 
     const inputName = rendered.getByTestId('input-name');
     expect(inputName).toBeTruthy();
@@ -39,7 +39,5 @@ describe('SignUp screen', () => {
     const btnSubmit = rendered.getByTestId('btn-submit');
     expect(btnSubmit).toBeTruthy();
     fireEvent.press(btnSubmit);
-
-    expect(rendered).toMatchSnapshot();
   });
 });

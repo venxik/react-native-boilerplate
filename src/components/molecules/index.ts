@@ -1,4 +1,4 @@
-import UsersCard from './UsersCard';
-import ProductsCard from './ProductsCard';
+import UsersCard from './FMUsersCard';
+import ProductsCard from './FMProductsCard';
 
 export { UsersCard, ProductsCard };
