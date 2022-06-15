@@ -37,6 +37,14 @@ jest.mock('@react-native-firebase/app');
 //   getToken: jest.fn(() => Promise.resolve('myMockToken')),
 //   onTokenRefresh: jest.fn((callback) => callback(Promise.resolve('Example'))),
 // }));
+jest.mock('@react-native-firebase/remote-config', () => () => ({
+  fetchAndActivate: jest.fn().mockReturnValue(Promise.resolve()),
+  fetch: jest.fn().mockReturnValue(Promise.resolve()),
+  getAll: jest.fn().mockReturnValue({
+    eva: { value: true },
+    eva_hmg: { value: false },
+  }),
+}));
 jest.mock('@react-native-firebase/crashlytics', () => () => ({
   recordError: jest.fn(),
   logEvent: jest.fn(),
