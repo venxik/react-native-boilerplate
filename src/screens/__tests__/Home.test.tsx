@@ -11,7 +11,7 @@ describe('Home screen', () => {
   it('should show text input', async () => {
     const { getByTestId } = render(<Home />);
     fireEvent.press(getByTestId('btn-products'));
-    await waitFor(() => expect(getByTestId('input-products')).toBeDefined());
+    // await waitFor(() => expect(getByTestId('input-products')).toBeDefined());
     expect(getByTestId('input-products')).toBeDefined();
   });
 });
