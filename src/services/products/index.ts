@@ -11,7 +11,7 @@ export interface IProductsDetail {
   stock: number;
   brand: string;
   category: string;
-  thumbnail: unknown;
+  thumbnail: string;
   images: string[];
 }
 
