@@ -1,9 +1,11 @@
+import { render } from '@testing-library/react-native';
 import React from 'react';
-import renderer from 'react-test-renderer';
 import App from '../index';
 
 describe('Testing App', () => {
   test('should render App correctly', () => {
-    renderer.create(<App />);
+    const rendered = render(<App />);
+
+    expect(rendered).toMatchSnapshot();
   });
 });

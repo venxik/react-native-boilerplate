@@ -38,6 +38,7 @@ export const useSignUp = () => {
   const onSubmit = async (data) => {
     try {
       crashlytics().log('User signed up.');
+      crashlytics().crash();
       await Promise.all([
         crashlytics().setAttribute('phone', data.phone),
         crashlytics().setAttribute('email', data.email),
@@ -49,7 +50,6 @@ export const useSignUp = () => {
       call.undefined.function();
     } catch (error: Error) {
       crashlytics().recordError(error);
-      crashlytics().crash();
     }
   };
 

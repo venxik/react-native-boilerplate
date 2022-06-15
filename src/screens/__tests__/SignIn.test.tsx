@@ -1,17 +1,23 @@
 import 'react-native';
 import { expect, it } from '@jest/globals';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import { render, fireEvent, waitFor, cleanup } from '@testing-library/react-native';
 import { renderHook, act } from '@testing-library/react-hooks/native';
 import React from 'react';
 import SignIn from '../SignIn';
 import { wrapper } from '../../../__mocks__/wrapper';
 import { useSignIn } from '../SignIn/hook';
+import { FOUserSection } from '../../components';
+import { useGetUserListQuery } from '../../services';
 
 const mockedNavigate = jest.fn();
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({ navigate: mockedNavigate }),
 }));
+
+jest.mock('axios');
+
+afterEach(cleanup);
 
 describe('SignIn Screen Test', () => {
   beforeEach(() => {
@@ -22,6 +28,16 @@ describe('SignIn Screen Test', () => {
   it('should can input form and navigate', async () => {
     const email = 'testing@email.com';
     const password = '123345678';
+
+    render(<FOUserSection />, { wrapper });
+
+    const { result, waitForNextUpdate } = renderHook(() => useGetUserListQuery(undefined), {
+      wrapper,
+    });
+
+    await waitForNextUpdate();
+    const initialResponse = result.current;
+    expect(initialResponse.data).toBeUndefined();
 
     const { getByPlaceholderText, getByTestId } = render(<SignIn />, { wrapper });
 

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Splash screen Render Splash screen 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    collapsable={false}
+    source={
+      Object {
+        "testUri": "../../../src/assets/images/common/logo.png",
+      }
+    }
+    style={
+      Object {
+        "height": 300,
+        "transform": Array [
+          Object {
+            "rotate": "0deg",
+          },
+        ],
+        "width": 300,
+      }
+    }
+  />
+</RCTSafeAreaView>
+`;
