@@ -1,12 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
+import { Button } from 'native-base';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const Setting = () => {
+export default function Setting() {
+  const navigation = useNavigation();
   return (
-    <View>
-      <Text>Setting</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, padding: 20, justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('RemoteConfigScreen')}>Remote Config Demo</Button>
+    </SafeAreaView>
   );
-};
-
-export default Setting;
+}

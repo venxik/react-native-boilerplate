@@ -29,6 +29,7 @@
     "@react-native-firebase/analytics": "^14.11.0",
     "@react-native-firebase/app": "^14.11.0",
     "@react-native-firebase/crashlytics": "^14.11.0",
+    "@react-native-firebase/remote-config": "^14.11.0",
     "@react-native-masked-view/masked-view": "^0.2.6",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",

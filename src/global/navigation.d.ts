@@ -18,6 +18,7 @@ declare global {
       SignInScreen: undefined;
       SignUpScreen: undefined;
       HomeTabNavigator: HomeTabParamList | undefined;
+      RemoteConfigScreen: undefined;
     };
 
     export type HomeStackParamList = {

@@ -2397,6 +2397,11 @@
     "@expo/config-plugins" "^4.1.5"
     stacktrace-js "^2.0.0"
 
+"@react-native-firebase/remote-config@^14.11.0":
+  version "14.11.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/remote-config/-/remote-config-14.11.0.tgz#f3e0fabb2c1794fea466eba034df242b32d3cdd4"
+  integrity sha512-yZ9fu3ckZ55t3nrtDnZ5ju60dzMuu24+xhrFHMnYBfc2jeUekwB6R3qXt9rurguT89XHCUOXWUtHvzZf+T14hA==
+
 "@react-native-masked-view/masked-view@^0.2.6":
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.2.6.tgz#b26c52d5db3ad0926b13deea79c69620966a9221"
