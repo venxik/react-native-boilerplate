@@ -69,20 +69,3 @@ describe('SignIn Screen Test', () => {
     expect(result.current.hidePassword).toBeFalsy();
   });
 });
-
-// describe('Testing react navigation', () => {
-//   test('page contains the header and 10 items', async () => {
-//     const component = (
-//       <NavigationContainer>
-//         <AppNavigator />
-//       </NavigationContainer>
-//     );
-
-//     const { findByText, findAllByText } = render(component);
-
-//     const header = await findByText('List of numbers from 1 to 20');
-//     const items = await findAllByText(/Item number/);
-
-//     expect(header).toBeTruthy();
-//     expect(items.length).toBe(10);
-//   });

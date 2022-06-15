@@ -38,4 +38,38 @@ const productsHandler = [
   }),
 ];
 
-export { productsHandler };
+const usersHandler = [
+  rest.get('https://dummyjson.com/users/search?q=', (req, res, ctx) => {
+    const mockApiResponse = {
+      products: [
+        {
+          id: 1,
+          firstName: 'test',
+          lastName: 'test',
+          image: 'https://dummyjson.com/image/i/products/1/thumbnail.jpg',
+        },
+        {
+          id: 2,
+          firstName: 'test',
+          lastName: 'test',
+          image: 'https://dummyjson.com/image/i/products/1/thumbnail.jpg',
+        },
+        {
+          id: 3,
+          firstName: 'test',
+          lastName: 'test',
+          image: 'https://dummyjson.com/image/i/products/1/thumbnail.jpg',
+        },
+        {
+          id: 4,
+          firstName: 'test',
+          lastName: 'test',
+          image: 'https://dummyjson.com/image/i/products/1/thumbnail.jpg',
+        },
+      ],
+    };
+    return res(ctx.json(mockApiResponse));
+  }),
+];
+
+export { productsHandler, usersHandler };

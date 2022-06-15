@@ -20,7 +20,9 @@ export default function FOProductsSection({ query }: IFOProductsSectionProps) {
   return (
     <Box flex={1} height={'100%'}>
       {error ? (
-        <Text alignSelf="center">There was an error</Text>
+        <Text alignSelf="center" testID="error-text">
+          There was an error
+        </Text>
       ) : isFetching ? (
         <Text alignSelf="center">Loading</Text>
       ) : data && data?.products.length > 0 ? (

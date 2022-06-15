@@ -37,7 +37,11 @@ export default function Home(): JSX.Element {
         </Button>
       </Button.Group>
       {selectedData == 'products' && (
-        <Input value={searchQuery} onChangeText={(e) => setSearchQuery(e)} />
+        <Input
+          value={searchQuery}
+          onChangeText={(e) => setSearchQuery(e)}
+          testID={'input-products'}
+        />
       )}
       <Box flex={1}>
         {selectedData == 'users' ? (
