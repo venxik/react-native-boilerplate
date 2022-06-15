@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 type NavigationProp = NativeStackNavigationProp<
   ReactNavigation.SignInStackParamList,
@@ -19,12 +20,27 @@ export const useSignIn = () => {
 
   // HANDLER
   const onToggleHidePassword = () => {
+    crashlytics().log('call onToggleHidePassword.');
     setHidePassword(!hidePassword);
   };
 
-  const goToHome = () => navigation.navigate('HomeTabNavigator');
+  const goToHome = () => {
+    crashlytics().log('User signed in.');
+    navigation.navigate('HomeTabNavigator');
+  };
+  const goToSignUp = () => {
+    crashlytics().log('call goToSignUp.');
+    navigation.navigate('SignUpScreen');
+  };
 
   // REACT HOOKS
+  useEffect(() => {
+    crashlytics().log('SignIn screen mounted.');
 
-  return { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome };
+    return () => {
+      crashlytics().log('SignIn screen unmounted.');
+    };
+  }, []);
+
+  return { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome, goToSignUp };
 };

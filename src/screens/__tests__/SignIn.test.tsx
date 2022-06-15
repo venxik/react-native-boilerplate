@@ -1,7 +1,6 @@
-import 'react-native';
 import { expect, it } from '@jest/globals';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import { renderHook, act } from '@testing-library/react-hooks/native';
+import { act, renderHook } from '@testing-library/react-hooks/native';
+import { cleanup, fireEvent, render, waitFor } from '@testing-library/react-native';
 import React from 'react';
 import SignIn from '../SignIn';
 import { wrapper } from '../../__mocks__/wrapper';
@@ -12,6 +11,10 @@ const mockedNavigate = jest.fn();
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({ navigate: mockedNavigate }),
 }));
+
+jest.mock('axios');
+
+afterEach(cleanup);
 
 describe('SignIn Screen Test', () => {
   beforeEach(() => {
@@ -26,12 +29,15 @@ describe('SignIn Screen Test', () => {
     const { getByPlaceholderText, getByTestId } = render(<SignIn />, { wrapper });
 
     const inputEmail = getByPlaceholderText('Type Email');
+    expect(inputEmail).toBeTruthy();
     fireEvent.changeText(inputEmail, email);
 
     const inputPassword = getByPlaceholderText('Type Password');
+    expect(inputPassword).toBeTruthy();
     fireEvent.changeText(inputPassword, password);
 
     const btnSubmit = getByTestId('btn-submit');
+    expect(btnSubmit).toBeTruthy();
     fireEvent.press(btnSubmit);
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledTimes(1));

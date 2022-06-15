@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Animated, Easing } from 'react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 export const useSplash = () => {
   // STATE
@@ -7,6 +8,7 @@ export const useSplash = () => {
 
   // HANDLER
   const startImageRotateFunction = () => {
+    crashlytics().log('call startImageRotateFunction.');
     rotateValueHolder.setValue(0);
     Animated.timing(rotateValueHolder, {
       toValue: 1,
@@ -23,7 +25,12 @@ export const useSplash = () => {
 
   // REACT HOOKS
   useEffect(() => {
+    crashlytics().log('Splash screen mounted.');
     startImageRotateFunction();
+
+    return () => {
+      crashlytics().log('Splash screen unmounted.');
+    };
   }, []);
 
   return {
