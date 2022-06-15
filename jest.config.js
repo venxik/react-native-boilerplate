@@ -7,6 +7,13 @@ module.exports = {
   testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   testPathIgnorePatterns: ['\\.snap$', '<rootDir>/node_modules/'],
   // transformIgnorePatterns: ['node_modules/?!(static-container)'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/theme/',
+    '<rootDir>/src/services/',
+    '<rootDir>/src/config/',
+    '<rootDir>/src/global/',
+    '<rootDir>/src/navigation/',
+  ],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?@?react-native|react-native|@react-navigation/.*|@react-native-community/.*|native-base/.*)',
   ],

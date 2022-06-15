@@ -38,7 +38,18 @@ describe('SignIn Screen Test', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('HomeTabNavigator');
   });
 
-  it('should show password text', () => {
+  it('should show `hide-password` icon', () => {
+    const { getByTestId } = render(<SignIn />, { wrapper });
+    expect(getByTestId('icon-hide')).toBeTruthy();
+  });
+
+  it('should show `show-password` icon', () => {
+    const { getByTestId } = render(<SignIn />, { wrapper });
+    fireEvent.press(getByTestId('hide-password'));
+    expect(getByTestId('icon-show')).toBeTruthy();
+  });
+
+  it('should show password icon', () => {
     const { result } = renderHook(() => useSignIn());
     expect(result.current.hidePassword).toBeTruthy();
   });
