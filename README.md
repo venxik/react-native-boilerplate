@@ -112,6 +112,47 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 
 camelCase for file and folder.
 
+### :beach_umbrella: Theme
+
+Using [Native-Base Theme](https://docs.nativebase.io/customizing-theme), we can create and/or modify existing variant of the component. It also supports [dark mode](https://docs.nativebase.io/dark-mode). Here's example of adding dark mode style and add new variant to Button component.
+
+```javascript
+const Button = {
+  // You can insert dark theme mode here
+  // mode(first, second) -> first is for light theme, second is for dark theme
+  baseStyle: (props: any) => {
+    return {
+      color: themeTools.mode('red.300', 'blue.300')(props),
+    };
+  },
+  // You can also define or modify existing variant of component here
+  variants: {
+    solid: (props: any) => {
+      return {
+        _text: {
+          fontFamily: props.fontFamily,
+          fontWeight: props.fontWeight,
+        },
+        ...props,
+      };
+    },
+    outlineLime: (props: any) => {
+      return {
+        borderWidth: '1',
+        borderColor: 'current.100',
+        _text: {
+          color: 'current.100',
+          fontWeight: props.fontWeight,
+          fontFamily: props.fontFamily,
+        },
+        ...props,
+      };
+    },
+  },
+};
+// You need to insert this object to the native-base's extendTheme function
+```
+
 ### :evergreen_tree: At this point, your project layout should look like this:
 
 ```

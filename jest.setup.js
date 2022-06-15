@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import 'whatwg-fetch';
 import 'react-native-gesture-handler/jestSetup';
+import AbortController from 'abort-controller';
+import { fetch, Headers, Request, Response } from 'cross-fetch';
+
+global.fetch = fetch;
+global.Headers = Headers;
+global.Request = Request;
+global.Response = Response;
+global.AbortController = AbortController;
 
 jest.mock('redux-persist', () => {
   const real = jest.requireActual('redux-persist');
@@ -55,3 +63,5 @@ jest.mock('@react-native-firebase/crashlytics', () => () => ({
 }));
 
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
+
+require('jest-fetch-mock').enableMocks();

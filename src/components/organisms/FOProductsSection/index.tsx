@@ -20,10 +20,12 @@ export default function FOProductsSection({ query }: IFOProductsSectionProps) {
   return (
     <Box flex={1} height={'100%'}>
       {error ? (
-        <Text alignSelf="center">There was an error</Text>
+        <Text alignSelf="center" testID="error-text">
+          There was an error
+        </Text>
       ) : isFetching ? (
         <Text alignSelf="center">Loading</Text>
-      ) : data && data?.products.length > 0 ? (
+      ) : data ? (
         <ScrollView flex={1} p={'4'} testID={'scrollview'}>
           {data?.products?.map((v: IProductsDetail) => (
             <ProductsCard desc={v.description} name={v.title} image={v.thumbnail} key={v.id} />
