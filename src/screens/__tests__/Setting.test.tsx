@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render } from '../../__mocks__/wrapper';
 import Setting from '../Setting';
 
 describe('Setting screen', () => {

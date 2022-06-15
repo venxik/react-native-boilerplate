@@ -1,7 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
 import FMProductsCard from '../FMProductsCard';
-import { wrapper } from '../../../__mocks__/wrapper';
+import { render } from '../../../__mocks__/wrapper';
 
 describe('FMProductsCard screen', () => {
   it('Render FMProductsCard correctly', () => {
@@ -14,7 +13,6 @@ describe('FMProductsCard screen', () => {
         key={1}
         onPress={mockedFn}
       />,
-      { wrapper },
     );
     expect(screen).toBeTruthy();
   });

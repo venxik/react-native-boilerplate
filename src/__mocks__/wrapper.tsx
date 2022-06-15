@@ -3,8 +3,9 @@ import { NativeBaseProvider } from 'native-base';
 import { Provider } from 'react-redux';
 import { store } from '../redux';
 import { themes } from '../theme';
+import { render } from '@testing-library/react-native';
 
-export const wrapper = ({ children }: { children: JSX.Element }) => {
+export const AllTheProviders = ({ children }: { children: JSX.Element }) => {
   return (
     <NativeBaseProvider
       theme={themes}
@@ -17,3 +18,11 @@ export const wrapper = ({ children }: { children: JSX.Element }) => {
     </NativeBaseProvider>
   );
 };
+
+const customRender = (ui: JSX.Element, options?: any) =>
+  render(ui, { wrapper: AllTheProviders, ...options });
+
+// re-export everything
+export * from '@testing-library/react-native';
+// override render method
+export { customRender as render };

@@ -39,9 +39,9 @@ const productsHandler = [
 ];
 
 const usersHandler = [
-  rest.get('https://dummyjson.com/users/search?q=', (req, res, ctx) => {
+  rest.get('https://dummyjson.com/users', (req, res, ctx) => {
     const mockApiResponse = {
-      products: [
+      users: [
         {
           id: 1,
           firstName: 'test',

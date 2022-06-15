@@ -1,10 +1,9 @@
 import 'react-native';
 import { expect, it } from '@jest/globals';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { renderHook, act } from '@testing-library/react-hooks/native';
 import React from 'react';
 import SignIn from '../SignIn';
-import { wrapper } from '../../__mocks__/wrapper';
+import { render, fireEvent, waitFor } from '../../__mocks__/wrapper';
 import { useSignIn } from '../SignIn/hook';
 
 const mockedNavigate = jest.fn();
@@ -23,7 +22,7 @@ describe('SignIn Screen Test', () => {
     const email = 'testing@email.com';
     const password = '123345678';
 
-    const { getByPlaceholderText, getByTestId } = render(<SignIn />, { wrapper });
+    const { getByPlaceholderText, getByTestId } = render(<SignIn />);
 
     const inputEmail = getByPlaceholderText('Type Email');
     fireEvent.changeText(inputEmail, email);
@@ -39,12 +38,12 @@ describe('SignIn Screen Test', () => {
   });
 
   it('should show `hide-password` icon', () => {
-    const { getByTestId } = render(<SignIn />, { wrapper });
+    const { getByTestId } = render(<SignIn />);
     expect(getByTestId('icon-hide')).toBeTruthy();
   });
 
   it('should show `show-password` icon', () => {
-    const { getByTestId } = render(<SignIn />, { wrapper });
+    const { getByTestId } = render(<SignIn />);
     fireEvent.press(getByTestId('hide-password'));
     expect(getByTestId('icon-show')).toBeTruthy();
   });
@@ -56,7 +55,7 @@ describe('SignIn Screen Test', () => {
 
   it('should hide password text', () => {
     const { result } = renderHook(() => useSignIn());
-    const { queryAllByTestId } = render(<SignIn />, { wrapper });
+    const { queryAllByTestId } = render(<SignIn />);
 
     expect(queryAllByTestId('icon-hide')).toBeDefined();
     expect(typeof result.current.onToggleHidePassword).toBe('function');
