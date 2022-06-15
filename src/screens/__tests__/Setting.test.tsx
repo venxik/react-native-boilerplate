@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import Setting from '../Setting';
 import { wrapper } from '../../__mocks__/wrapper';
 
@@ -10,8 +10,15 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 describe('Setting screen', () => {
-  it('Render Setting screen', () => {
+  it('Render Setting screen', async () => {
     const setting = render(<Setting />, { wrapper });
-    expect(setting).toBeTruthy();
+
+    const btnSubmit = setting.getByTestId('btn-demo-rcd');
+    expect(btnSubmit).toBeTruthy();
+    fireEvent.press(btnSubmit);
+
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledTimes(1));
+    expect(mockedNavigate).toHaveBeenCalledWith('RemoteConfigScreen');
+    expect(setting.toJSON()).toMatchSnapshot();
   });
 });

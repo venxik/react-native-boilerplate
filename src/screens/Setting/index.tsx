@@ -7,7 +7,9 @@ export default function Setting() {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={{ flex: 1, padding: 20, justifyContent: 'center' }}>
-      <Button onPress={() => navigation.navigate('RemoteConfigScreen')}>Remote Config Demo</Button>
+      <Button testID="btn-demo-rcd" onPress={() => navigation.navigate('RemoteConfigScreen')}>
+        Remote Config Demo
+      </Button>
     </SafeAreaView>
   );
 }
