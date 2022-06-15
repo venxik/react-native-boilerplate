@@ -1,6 +1,6 @@
 import { expect, it } from '@jest/globals';
-import { act, renderHook } from '@testing-library/react-hooks/native';
-import { cleanup, fireEvent, render, waitFor } from '@testing-library/react-native';
+import { renderHook } from '@testing-library/react-hooks/native';
+import { cleanup, fireEvent, render, waitFor, act } from '@testing-library/react-native';
 import React from 'react';
 import SignIn from '../SignIn';
 import { wrapper } from '../../__mocks__/wrapper';
@@ -14,14 +14,16 @@ jest.mock('@react-navigation/native', () => ({
 
 jest.mock('axios');
 
-afterEach(cleanup);
+beforeEach(() => {
+  // Alternatively, set "clearMocks" in your Jest config to "true"
+  jest.fn().mockClear();
+});
+
+afterEach(() => {
+  cleanup();
+});
 
 describe('SignIn Screen Test', () => {
-  beforeEach(() => {
-    // Alternatively, set "clearMocks" in your Jest config to "true"
-    jest.fn().mockClear();
-  });
-
   it('should can input form and navigate', async () => {
     const email = 'testing@email.com';
     const password = '123345678';
@@ -30,15 +32,21 @@ describe('SignIn Screen Test', () => {
 
     const inputEmail = getByPlaceholderText('Type Email');
     expect(inputEmail).toBeTruthy();
-    fireEvent.changeText(inputEmail, email);
+    act(() => {
+      fireEvent.changeText(inputEmail, email);
+    });
 
     const inputPassword = getByPlaceholderText('Type Password');
     expect(inputPassword).toBeTruthy();
-    fireEvent.changeText(inputPassword, password);
+    act(() => {
+      fireEvent.changeText(inputPassword, password);
+    });
 
     const btnSubmit = getByTestId('btn-submit');
     expect(btnSubmit).toBeTruthy();
-    fireEvent.press(btnSubmit);
+    act(() => {
+      fireEvent.press(btnSubmit);
+    });
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledTimes(1));
     expect(mockedNavigate).toHaveBeenCalledWith('HomeTabNavigator');
@@ -51,7 +59,9 @@ describe('SignIn Screen Test', () => {
 
   it('should show `show-password` icon', () => {
     const { getByTestId } = render(<SignIn />, { wrapper });
-    fireEvent.press(getByTestId('hide-password'));
+    act(() => {
+      fireEvent.press(getByTestId('hide-password'));
+    });
     expect(getByTestId('icon-show')).toBeTruthy();
   });
 

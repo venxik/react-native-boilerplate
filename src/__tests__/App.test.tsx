@@ -3,9 +3,8 @@ import React from 'react';
 import App from '../index';
 
 describe('Testing App', () => {
-  test('should render App correctly', () => {
+  test('should render App correctly', async () => {
     const rendered = render(<App />);
-
     expect(rendered).toMatchSnapshot();
   });
 });

@@ -5,7 +5,7 @@ import RemoteConfig from '../RemoteConfig';
 
 describe('RemoteConfig screen', () => {
   it('should remote config screen can render', async () => {
-    const settingRender = render(<RemoteConfig />, { wrapper }).toJSON();
+    const settingRender = render(<RemoteConfig />, { wrapper });
     expect(settingRender).toMatchSnapshot();
   });
 });
