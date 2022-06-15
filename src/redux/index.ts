@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, PreloadedState } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import logger from 'redux-logger';
 import {
@@ -22,32 +22,58 @@ import { rootPersistConfig, rootReducer } from './rootReducer';
 // eslint-disable-next-line import/no-extraneous-dependencies
 const createDebugger = require('redux-flipper').default;
 
-const store = configureStore({
-  reducer: persistReducer(rootPersistConfig, rootReducer),
-  middleware: (getDefaultMiddleware) =>
-    __DEV__ && !process.env.JEST_WORKER_ID
-      ? getDefaultMiddleware({
-          serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-          },
-        })
-          .concat(combinedMiddleware)
-          .concat(logger)
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          .concat(createDebugger!())
-      : getDefaultMiddleware({
-          serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-          },
-        }).concat(combinedMiddleware),
-});
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: persistReducer(rootPersistConfig, rootReducer),
+    middleware: (getDefaultMiddleware) =>
+      __DEV__ && !process.env.JEST_WORKER_ID
+        ? getDefaultMiddleware({
+            serializableCheck: {
+              ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+          })
+            .concat(combinedMiddleware)
+            .concat(logger)
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            .concat(createDebugger!())
+        : getDefaultMiddleware({
+            serializableCheck: {
+              ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+          }).concat(combinedMiddleware),
+    preloadedState,
+  });
+};
+
+// const store = configureStore({
+//   reducer: persistReducer(rootPersistConfig, rootReducer),
+//   middleware: (getDefaultMiddleware) =>
+//     __DEV__ && !process.env.JEST_WORKER_ID
+//       ? getDefaultMiddleware({
+//           serializableCheck: {
+//             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//           },
+//         })
+//           .concat(combinedMiddleware)
+//           .concat(logger)
+//           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+//           .concat(createDebugger!())
+//       : getDefaultMiddleware({
+//           serializableCheck: {
+//             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//           },
+//         }).concat(combinedMiddleware),
+// });
+
+const store = setupStore();
 
 const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-type RootState = ReturnType<typeof rootReducer>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 type AppDispatch = typeof store.dispatch;
+type RootState = ReturnType<typeof rootReducer>;
+type AppStore = ReturnType<typeof setupStore>;
 
 const useReduxDispatch = () => useDispatch<AppDispatch>();
 const useReduxSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -56,6 +82,15 @@ const useReduxSelector: TypedUseSelectorHook<RootState> = useSelector;
  * Initial Redux Query
  */
 
-export { store, persistor, useSelector, useDispatch, useReduxDispatch, useReduxSelector };
+export {
+  store,
+  persistor,
+  useSelector,
+  useDispatch,
+  useReduxDispatch,
+  useReduxSelector,
+  RootState,
+  AppStore,
+};
 
 // export * from './modules';
