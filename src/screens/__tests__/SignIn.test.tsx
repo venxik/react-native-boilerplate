@@ -2,9 +2,8 @@ import { expect, it } from '@jest/globals';
 import { act, renderHook } from '@testing-library/react-hooks/native';
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react-native';
 import React from 'react';
-import 'react-native';
-import { wrapper } from '../../../__mocks__/wrapper';
 import SignIn from '../SignIn';
+import { wrapper } from '../../__mocks__/wrapper';
 import { useSignIn } from '../SignIn/hook';
 
 const mockedNavigate = jest.fn();
@@ -45,7 +44,18 @@ describe('SignIn Screen Test', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('HomeTabNavigator');
   });
 
-  it('should show password text', () => {
+  it('should show `hide-password` icon', () => {
+    const { getByTestId } = render(<SignIn />, { wrapper });
+    expect(getByTestId('icon-hide')).toBeTruthy();
+  });
+
+  it('should show `show-password` icon', () => {
+    const { getByTestId } = render(<SignIn />, { wrapper });
+    fireEvent.press(getByTestId('hide-password'));
+    expect(getByTestId('icon-show')).toBeTruthy();
+  });
+
+  it('should show password icon', () => {
     const { result } = renderHook(() => useSignIn());
     expect(result.current.hidePassword).toBeTruthy();
   });

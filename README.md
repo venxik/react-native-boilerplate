@@ -30,7 +30,7 @@ React Native boilerplate repository version 0.0.1
 
 ### 🚚 How to run, and build Apk
 
-NOTES: This boilerplate uses yarn as main command, not npm.
+NOTES: This boilerplate uses `yarn` as main command, not `npm`.
 
 Example how to run android with development env
 Make sure to open android simulator or connect android devices.
@@ -88,7 +88,8 @@ If there is error, try to run with Xcode
 
 1. development
 2. production
-   To be added more.
+
+To be added more.
 
 ### :test_tube: How to Test Coverage
 

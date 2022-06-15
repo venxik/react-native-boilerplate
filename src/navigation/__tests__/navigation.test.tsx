@@ -7,7 +7,7 @@ import Router, {
   SignInStackNavigator,
   SplashNavigator,
 } from '../index';
-import { wrapper } from '../../../__mocks__/wrapper';
+import { wrapper } from '../../__mocks__/wrapper';
 
 afterEach(cleanup);
 

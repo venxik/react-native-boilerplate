@@ -1,7 +1,7 @@
 import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { Provider } from 'react-redux';
-import { store } from '../src/redux';
+import { store } from '../redux';
 
 export const wrapper = ({ children }: { children: JSX.Element }) => {
   return (
