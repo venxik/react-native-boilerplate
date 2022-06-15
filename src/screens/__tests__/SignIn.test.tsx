@@ -1,13 +1,11 @@
-import 'react-native';
 import { expect, it } from '@jest/globals';
-import { render, fireEvent, waitFor, cleanup } from '@testing-library/react-native';
-import { renderHook, act } from '@testing-library/react-hooks/native';
+import { act, renderHook } from '@testing-library/react-hooks/native';
+import { cleanup, fireEvent, render, waitFor } from '@testing-library/react-native';
 import React from 'react';
-import SignIn from '../SignIn';
+import 'react-native';
 import { wrapper } from '../../../__mocks__/wrapper';
+import SignIn from '../SignIn';
 import { useSignIn } from '../SignIn/hook';
-import { FOUserSection } from '../../components';
-import { useGetUserListQuery } from '../../services';
 
 const mockedNavigate = jest.fn();
 
@@ -29,25 +27,18 @@ describe('SignIn Screen Test', () => {
     const email = 'testing@email.com';
     const password = '123345678';
 
-    render(<FOUserSection />, { wrapper });
-
-    const { result, waitForNextUpdate } = renderHook(() => useGetUserListQuery(undefined), {
-      wrapper,
-    });
-
-    await waitForNextUpdate();
-    const initialResponse = result.current;
-    expect(initialResponse.data).toBeUndefined();
-
     const { getByPlaceholderText, getByTestId } = render(<SignIn />, { wrapper });
 
     const inputEmail = getByPlaceholderText('Type Email');
+    expect(inputEmail).toBeTruthy();
     fireEvent.changeText(inputEmail, email);
 
     const inputPassword = getByPlaceholderText('Type Password');
+    expect(inputPassword).toBeTruthy();
     fireEvent.changeText(inputPassword, password);
 
     const btnSubmit = getByTestId('btn-submit');
+    expect(btnSubmit).toBeTruthy();
     fireEvent.press(btnSubmit);
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledTimes(1));

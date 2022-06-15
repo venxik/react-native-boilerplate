@@ -21,17 +21,23 @@ describe('SignUp screen', () => {
     const rendered = render(<SignUp />, { wrapper });
 
     const inputName = rendered.getByTestId('input-name');
+    expect(inputName).toBeTruthy();
     fireEvent.changeText(inputName, data.name);
     const inputPhone = rendered.getByTestId('input-phone');
+    expect(inputPhone).toBeTruthy();
     fireEvent.changeText(inputPhone, data.phone);
     const inputEmail = rendered.getByTestId('input-email');
+    expect(inputEmail).toBeTruthy();
     fireEvent.changeText(inputEmail, data.email);
     const inputPassword = rendered.getByTestId('input-password');
+    expect(inputPassword).toBeTruthy();
     fireEvent.changeText(inputPassword, data.password);
     const inputPasswordConfirmation = rendered.getByTestId('input-password-confirmation');
+    expect(inputPasswordConfirmation).toBeTruthy();
     fireEvent.changeText(inputPasswordConfirmation, data.passwordConfirmation);
 
     const btnSubmit = rendered.getByTestId('btn-submit');
+    expect(btnSubmit).toBeTruthy();
     fireEvent.press(btnSubmit);
 
     expect(rendered).toMatchSnapshot();
