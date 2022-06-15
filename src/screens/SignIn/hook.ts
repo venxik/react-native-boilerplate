@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import crashlytics from '@react-native-firebase/crashlytics';
+import analytics from '@react-native-firebase/analytics';
 
 type NavigationProp = NativeStackNavigationProp<
   ReactNavigation.SignInStackParamList,
@@ -36,6 +37,12 @@ export const useSignIn = () => {
   // REACT HOOKS
   useEffect(() => {
     crashlytics().log('SignIn screen mounted.');
+    const onStarAnalytics = async () => {
+      await analytics().logLogin({
+        method: 'api',
+      });
+    };
+    onStarAnalytics();
 
     return () => {
       crashlytics().log('SignIn screen unmounted.');
