@@ -22,3 +22,28 @@ jest.mock('react-native-reanimated', () => {
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+
+jest.mock('@react-native-firebase/app');
+
+// jest.mock('react-native-notifications');
+
+// jest.mock('@react-native-firebase/database');
+
+// jest.mock('@react-native-firebase/messaging', () => () => ({
+//   hasPermission: jest.fn(() => Promise.resolve(true)),
+//   subscribeToTopic: jest.fn(),
+//   unsubscribeFromTopic: jest.fn(),
+//   requestPermission: jest.fn(() => Promise.resolve(true)),
+//   getToken: jest.fn(() => Promise.resolve('myMockToken')),
+//   onTokenRefresh: jest.fn((callback) => callback(Promise.resolve('Example'))),
+// }));
+jest.mock('@react-native-firebase/crashlytics', () => () => ({
+  recordError: jest.fn(),
+  logEvent: jest.fn(),
+  log: jest.fn(),
+  setUserProperties: jest.fn(),
+  setUserId: jest.fn(),
+  setCurrentScreen: jest.fn(),
+}));
+
+jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');

@@ -10,6 +10,10 @@ jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({ navigate: mockedNavigate }),
 }));
 
+jest.mock('axios');
+
+afterEach(cleanup);
+
 describe('SignIn Screen Test', () => {
   beforeEach(() => {
     // Alternatively, set "clearMocks" in your Jest config to "true"
@@ -23,12 +27,15 @@ describe('SignIn Screen Test', () => {
     const { getByPlaceholderText, getByTestId } = render(<SignIn />);
 
     const inputEmail = getByPlaceholderText('Type Email');
+    expect(inputEmail).toBeTruthy();
     fireEvent.changeText(inputEmail, email);
 
     const inputPassword = getByPlaceholderText('Type Password');
+    expect(inputPassword).toBeTruthy();
     fireEvent.changeText(inputPassword, password);
 
     const btnSubmit = getByTestId('btn-submit');
+    expect(btnSubmit).toBeTruthy();
     fireEvent.press(btnSubmit);
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledTimes(1));
