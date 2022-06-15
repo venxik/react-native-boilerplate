@@ -5,6 +5,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useForm } from 'react-hook-form';
 import crashlytics from '@react-native-firebase/crashlytics';
+import analytics from '@react-native-firebase/analytics';
 import { call } from 'react-native-reanimated';
 
 type NavigationProp = NativeStackNavigationProp<
@@ -37,8 +38,15 @@ export const useSignUp = () => {
 
   const onSubmit = async (data) => {
     try {
+      const onStarAnalytics = async () => {
+        await analytics().logSignUp({
+          method: 'api',
+        });
+        await analytics().logEvent('user_engagement', data);
+      };
+      onStarAnalytics();
+
       crashlytics().log('User signed up.');
-      crashlytics().crash();
       await Promise.all([
         crashlytics().setAttribute('phone', data.phone),
         crashlytics().setAttribute('email', data.email),
@@ -47,6 +55,7 @@ export const useSignUp = () => {
           passwordConfirmation: data.passwordConfirmation,
         }),
       ]);
+      // crashlytics().crash();
       call.undefined.function();
     } catch (error: Error) {
       crashlytics().recordError(error);
