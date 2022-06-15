@@ -1,16 +1,16 @@
 import React from 'react';
-import { render, fireEvent } from '../../__mocks__/wrapper';
+import { render, fireEvent, waitFor } from '../../__mocks__/wrapper';
 import Home from '../Home';
 
 describe('Home screen', () => {
-  it('renders Home screen correctly', () => {
-    const splash = render(<Home />);
-    expect(splash).toBeDefined();
+  it('renders Home screen correctly', async () => {
+    const screen = render(<Home />);
+    await waitFor(() => expect(screen).toBeDefined());
   });
 
-  it('should show text input', () => {
+  it('should show text input', async () => {
     const { getByTestId } = render(<Home />);
     fireEvent.press(getByTestId('btn-products'));
-    expect(getByTestId('input-products')).toBeDefined();
+    await waitFor(() => expect(getByTestId('input-products')).toBeDefined());
   });
 });

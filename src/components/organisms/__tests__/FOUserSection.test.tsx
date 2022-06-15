@@ -1,33 +1,58 @@
+import 'react-native';
 import React from 'react';
-import { rest } from 'msw';
-import { server } from '../../../__mocks__/server';
 import FOUserSection from '../FOUserSection';
-import { render, waitFor } from '../../../__mocks__/wrapper';
+import { AllTheProviders, render } from '../../../__mocks__/wrapper';
+import { renderHook } from '@testing-library/react-hooks/native';
+import { useGetUserListQuery } from '../../../services';
+import { products } from '../../../__mocks__/testData';
 
-// make debug output for TestingLibrary Errors larger
-process.env.DEBUG_PRINT_LIMIT = '15000';
+const updateTimeout = 5000;
 
-// enable API mocking in test runs using the same request handlers
-// as for the client-side mocking.
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
-afterAll(() => server.close());
-afterEach(() => server.resetHandlers());
+beforeEach((): void => {
+  fetchMock.resetMocks();
+});
 
 describe('FOUserSection screen', () => {
-  it('handles good response', () => {
-    const { getByTestId } = render(<FOUserSection />);
-    waitFor(() => expect(getByTestId('scrollview')).toBeDefined());
+  it('handles good response', async () => {
+    fetchMock.mockResponse(JSON.stringify({ data: products }));
+
+    const { result, waitForNextUpdate } = renderHook(() => useGetUserListQuery(undefined), {
+      wrapper: AllTheProviders,
+    });
+    const { getByText, container } = render(<FOUserSection />);
+
+    const initialResponse = result.current;
+    expect(initialResponse.data).toBeUndefined();
+    expect(initialResponse.isLoading).toBe(true);
+    expect(getByText('Loading')).toBeDefined();
+    // expect(getByTestId('scrollview')).toBeDefined();
+    await waitForNextUpdate({ timeout: updateTimeout });
+    // await act(async () => {
+    //   // await waitForNextUpdate({ timeout: updateTimeout });
+    //   expect(getByTestId('scrollview')).toBeDefined();
+    // });
+    expect(container).toBeDefined();
+
+    const nextResponse = result.current;
+    expect(nextResponse.data).not.toBeUndefined();
+    expect(nextResponse.isLoading).toBe(false);
+    expect(nextResponse.isSuccess).toBe(true);
   });
 
   it('handles error response', async () => {
-    // force msw to return error response
-    server.use(
-      rest.get('https://dummyjson.com/users', (req, res, ctx) => {
-        return res(ctx.status(500));
-      }),
-    );
-    const { getByTestId } = render(<FOUserSection />);
-    // const errorText = getByTestId('error-text');
-    await waitFor(() => expect(getByTestId('error-text')).toBeDefined());
+    fetchMock.mockReject(new Error('Internal Server Error'));
+    const { result, waitForNextUpdate } = renderHook(() => useGetUserListQuery(undefined), {
+      wrapper: AllTheProviders,
+    });
+    const initialResponse = result.current;
+    expect(initialResponse.data).toBeUndefined();
+    expect(initialResponse.isLoading).toBe(true);
+
+    await waitForNextUpdate({ timeout: updateTimeout });
+
+    const nextResponse = result.current;
+    expect(nextResponse.data).toBeUndefined();
+    expect(nextResponse.isLoading).toBe(false);
+    expect(nextResponse.isError).toBe(true);
   });
 });

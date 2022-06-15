@@ -28,6 +28,7 @@ export const productsAPI = createApi({
   reducerPath: reducerPath,
   baseQuery: functionsBaseQuery(),
   tagTypes: ['Products'],
+  keepUnusedDataFor: process.env.NODE_ENV !== 'test' ? 60 : 0,
   endpoints: (builder) => ({
     getProduct: builder.query<IProducts, string>({
       query: (query) => `/products/search?q=${query}`,

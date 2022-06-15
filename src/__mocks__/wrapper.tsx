@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { Provider } from 'react-redux';
-import { store } from '../redux';
 import { themes } from '../theme';
 import { render } from '@testing-library/react-native';
+import type { RenderOptions } from '@testing-library/react-native';
+import { setupStore } from '../redux';
+import type { AppStore, RootState } from '../redux';
+import type { PreloadedState } from '@reduxjs/toolkit';
+
+// This type interface extends the default options for render from RTL, as well
+// as allows the user to specify other things such as initialState, store. For
+// future dependencies, such as wanting to test with react-router, you can extend
+// this interface to accept a path and route and use those in a <MemoryRouter />
+interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
+  preloadedState?: PreloadedState<RootState>;
+  store?: AppStore;
+}
+
+function renderWithProviders(
+  ui: React.ReactElement,
+  {
+    preloadedState = {},
+    store = setupStore(preloadedState),
+    ...renderOptions
+  }: ExtendedRenderOptions = {},
+) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
+    return (
+      <NativeBaseProvider
+        theme={themes}
+        initialWindowMetrics={{
+          frame: { x: 0, y: 0, width: 0, height: 0 },
+          insets: { top: 0, left: 0, right: 0, bottom: 0 },
+        }}
+      >
+        <Provider store={store}>{children}</Provider>
+      </NativeBaseProvider>
+    );
+  }
+  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
 
 export const AllTheProviders = ({ children }: { children: JSX.Element }) => {
   return (
@@ -14,15 +51,15 @@ export const AllTheProviders = ({ children }: { children: JSX.Element }) => {
         insets: { top: 0, left: 0, right: 0, bottom: 0 },
       }}
     >
-      <Provider store={store}>{children}</Provider>
+      <Provider store={setupStore({})}>{children}</Provider>
     </NativeBaseProvider>
   );
 };
 
-const customRender = (ui: JSX.Element, options?: any) =>
-  render(ui, { wrapper: AllTheProviders, ...options });
+// const customRender = (ui: JSX.Element, options?: any) =>
+//   render(ui, { wrapper: AllTheProviders, ...options });
 
 // re-export everything
 export * from '@testing-library/react-native';
 // override render method
-export { customRender as render };
+export { renderWithProviders as render };

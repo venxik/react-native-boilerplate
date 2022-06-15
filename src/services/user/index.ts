@@ -20,6 +20,7 @@ export const userAPI = createApi({
   reducerPath: reducerPath,
   baseQuery: functionsBaseQuery(),
   tagTypes: ['User'],
+  keepUnusedDataFor: process.env.NODE_ENV !== 'test' ? 60 : 0,
   endpoints: (builder) => ({
     getUserList: builder.query<IUsers, void>({
       query: () => `/users`,

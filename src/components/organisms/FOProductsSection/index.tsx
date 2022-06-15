@@ -25,7 +25,7 @@ export default function FOProductsSection({ query }: IFOProductsSectionProps) {
         </Text>
       ) : isFetching ? (
         <Text alignSelf="center">Loading</Text>
-      ) : data && data?.products.length > 0 ? (
+      ) : data ? (
         <ScrollView flex={1} p={'4'} testID={'scrollview'}>
           {data?.products?.map((v: IProductsDetail) => (
             <ProductsCard desc={v.description} name={v.title} image={v.thumbnail} key={v.id} />
