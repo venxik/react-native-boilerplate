@@ -12,5 +12,6 @@ describe('Home screen', () => {
     const { getByTestId } = render(<Home />);
     fireEvent.press(getByTestId('btn-products'));
     await waitFor(() => expect(getByTestId('input-products')).toBeDefined());
+    expect(getByTestId('input-products')).toBeDefined();
   });
 });
