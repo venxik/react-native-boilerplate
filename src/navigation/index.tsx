@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import analytics from '@react-native-firebase/analytics';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useTheme, AddIcon } from 'native-base';
-import { Home, Setting, SignIn, SignUp, Splash } from '../screens';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AddIcon, useTheme } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { ABTest1, Home, RemoteConfig, Setting, SignIn, SignUp, Splash } from '../screens';
 
 const SignInStack = createNativeStackNavigator<ReactNavigation.SignInStackParamList>();
 export function SignInStackNavigator() {
@@ -12,6 +13,8 @@ export function SignInStackNavigator() {
       <SignInStack.Screen name="SignInScreen" component={SignIn} />
       <SignInStack.Screen name="SignUpScreen" component={SignUp} />
       <SignInStack.Screen name="HomeTabNavigator" component={HomeTabNavigator} />
+      <SignInStack.Screen name="RemoteConfigScreen" component={RemoteConfig} />
+      <SignInStack.Screen name="ABTest1" component={ABTest1} />
     </SignInStack.Navigator>
   );
 }
@@ -83,6 +86,8 @@ export function SplashNavigator() {
 
 function Router() {
   const [loading, setLoading] = useState(true);
+  const routeNameRef = React.useRef<any>();
+  const navigationRef = React.useRef<any>();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -95,7 +100,24 @@ function Router() {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() => {
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+      }}
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+        if (previousRouteName !== currentRouteName) {
+          await analytics().logScreenView({
+            screen_name: currentRouteName,
+            screen_class: currentRouteName,
+          });
+        }
+        routeNameRef.current = currentRouteName;
+      }}
+    >
       {loading ? <SplashNavigator /> : <SignInStackNavigator />}
     </NavigationContainer>
   );

@@ -1,6 +1,6 @@
+import crashlytics from '@react-native-firebase/crashlytics';
 import { useEffect } from 'react';
 import { Animated, Easing } from 'react-native';
-import crashlytics from '@react-native-firebase/crashlytics';
 
 export const useSplash = () => {
   // STATE

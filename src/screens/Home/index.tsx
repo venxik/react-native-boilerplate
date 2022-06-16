@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Box, Button, Heading, Input } from 'native-base';
 import { FOProductsSection, FOUserSection } from '../../components';
 import { useDebounce } from '../../hooks';
+import { useHome } from './hook';
 
 export default function Home(): JSX.Element {
-  const [selectedData, setSelectedData] = useState<'users' | 'products'>('users');
+  const { onTabClick, selectedData } = useHome('');
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
@@ -24,14 +25,14 @@ export default function Home(): JSX.Element {
         <Button
           testID="btn-users"
           variant={selectedData == 'users' ? 'solid' : 'outline'}
-          onPress={() => setSelectedData('users')}
+          onPress={() => onTabClick('users')}
         >
           Users
         </Button>
         <Button
           testID="btn-products"
           variant={selectedData == 'products' ? 'solid' : 'outline'}
-          onPress={() => setSelectedData('products')}
+          onPress={() => onTabClick('products')}
         >
           Products
         </Button>
