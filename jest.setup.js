@@ -57,6 +57,9 @@ jest.mock('@react-native-firebase/remote-config', () => () => ({
     eva_hmg: { value: false },
   }),
 }));
+jest.mock('@react-native-firebase/in-app-messaging', () => () => ({
+  setMessagesDisplaySuppressed: jest.fn(),
+}));
 jest.mock('@react-native-firebase/crashlytics', () => () => ({
   recordError: jest.fn(),
   logEvent: jest.fn(),

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
 import { Box, Button, Heading, Input } from 'native-base';
+import React, { useState } from 'react';
 import { FOProductsSection, FOUserSection } from '../../components';
 import { useDebounce } from '../../hooks';
 import { useHome } from './hook';
 
 export default function Home(): JSX.Element {
-  const { onTabClick, selectedData } = useHome('');
+  const { onTabClick, selectedData } = useHome();
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
