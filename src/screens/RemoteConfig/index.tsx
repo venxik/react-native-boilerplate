@@ -1,4 +1,5 @@
 import remoteConfig from '@react-native-firebase/remote-config';
+import { useNavigation } from '@react-navigation/native';
 import { Box, Button, FlatList, Heading, HStack, Spacer, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl } from 'react-native';
@@ -7,13 +8,14 @@ export default function RemoteConfig() {
   const [config, setConfig] = useState<Array<ObjectConstructor>>([]);
   const [isFetched, setIsFetched] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const navigation = useNavigation();
   const fetchRemoteData = async () => {
     try {
       await remoteConfig().setDefaults({
-        FONT: 'Raleway',
-        IS_DARK: true,
-        LANGUAGE: 'id',
-        THEME: 'blue',
+        font: 'Raleway',
+        is_dark: true,
+        language: 'id',
+        theme: 'blue',
       }); // setting default value
       await remoteConfig().fetch(10); // 10 seconds cache
       /**
@@ -102,8 +104,11 @@ export default function RemoteConfig() {
         )}
         keyExtractor={(item) => item.key}
       />
-      <Button style={{ margin: 20 }} onPress={fetchRemoteData}>
+      <Button style={{ marginHorizontal: 20 }} onPress={fetchRemoteData}>
         Fetch
+      </Button>
+      <Button style={{ margin: 20 }} onPress={() => navigation.goBack()}>
+        Back
       </Button>
     </Box>
   );
