@@ -8,6 +8,9 @@ export default function Setting() {
   return (
     <SafeAreaView style={{ flex: 1, padding: 20, justifyContent: 'center' }}>
       <Button onPress={() => navigation.navigate('RemoteConfigScreen')}>Remote Config Demo</Button>
+      <Button style={{ marginTop: 20 }} onPress={() => navigation.navigate('ABTest1')}>
+        A/B Testing Demo
+      </Button>
     </SafeAreaView>
   );
 }

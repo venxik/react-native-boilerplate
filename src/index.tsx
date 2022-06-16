@@ -6,8 +6,10 @@ import Router from './navigation';
 import { useLayout } from './hooks';
 import { NativeBaseProvider } from 'native-base';
 import { themes } from './theme';
+import { fetchConfig } from './utils';
 
 useLayout().setupLayoutAnimation();
+fetchConfig();
 
 function App() {
   return (
