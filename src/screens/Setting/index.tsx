@@ -1,6 +1,7 @@
+import inAppMessaging from '@react-native-firebase/in-app-messaging';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'native-base';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNotification } from '../../hooks';
 
@@ -13,6 +14,14 @@ export default function Setting() {
     displayNotification('NotificationTitle', 'NotificationBody');
   };
 
+  useEffect(() => {
+    // const installationsForDefaultApp = firebase.installations().getId();
+    // installationsForDefaultApp.then((res) => console.log(res)).catch((err) => console.log(err));
+    async function bootstrap() {
+      await inAppMessaging().setMessagesDisplaySuppressed(true);
+    }
+    bootstrap();
+  }, []);
   return (
     <SafeAreaView style={{ flex: 1, padding: 20, justifyContent: 'center' }}>
       <Button onPress={() => navigation.navigate('RemoteConfigScreen')}>Remote Config Demo</Button>
@@ -21,6 +30,12 @@ export default function Setting() {
       </Button>
       <Button style={{ marginTop: 20 }} onPress={() => handleDisplayNotification()}>
         Local Push Notification Demo
+      </Button>
+      <Button
+        style={{ marginTop: 20 }}
+        onPress={async () => inAppMessaging().setMessagesDisplaySuppressed(true)}
+      >
+        In App Messaging Demo
       </Button>
     </SafeAreaView>
   );

@@ -2,11 +2,15 @@ import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import {
   AspectRatio,
-  Box, Button, Center, Heading,
+  Box,
+  Button,
+  Center,
+  Heading,
   HStack,
   Image,
   Stack,
-  Text, View
+  Text,
+  View,
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { getRemoteValue, refreshConfig } from '../../utils';

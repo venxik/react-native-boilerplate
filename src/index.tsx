@@ -17,25 +17,26 @@ function App() {
   const { displayNotification } = useNotification();
 
   async function requestUserPermission() {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+    await messaging().requestPermission();
+    // const authStatus = await messaging().requestPermission();
+    // const enabled =
+    //   authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    //   authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-    if (enabled) {
-      // console.log('Authorization status:', authStatus);
-    } else {
-      // console.log('User declined permissions');
-    }
+    // if (enabled) {
+    //   // console.log('Authorization status:', authStatus);
+    // } else {
+    //   // console.log('User declined permissions');
+    // }
   }
 
   useEffect(() => {
     requestUserPermission();
 
     notifee.onBackgroundEvent(async ({ type }) => {
-      if (type === EventType.PRESS) {
-        // console.log('User pressed the notification.', detail.pressAction.id);
-      }
+      // if (type === EventType.PRESS) {
+      // console.log('User pressed the notification.', detail.pressAction.id);
+      // }
     });
 
     messaging().setBackgroundMessageHandler(async (remoteMessage) => {
