@@ -1,7 +1,6 @@
 import React from 'react';
-import { render } from '../../__mocks__/wrapper';
+import { render, waitFor } from '../../__mocks__/wrapper';
 import Setting from '../Setting';
-import { wrapper } from '../../__mocks__/wrapper';
 
 const mockedNavigate = jest.fn();
 
@@ -10,8 +9,8 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 describe('Setting screen', () => {
-  it('Render Setting screen', () => {
-    const setting = render(<Setting />, { wrapper });
-    expect(setting).toBeTruthy();
+  it('Render Setting screen', async () => {
+    const setting = render(<Setting />);
+    await waitFor(() => expect(setting).toBeDefined());
   });
 });

@@ -17,8 +17,9 @@ declare global {
     export type SignInStackParamList = {
       SignInScreen: undefined;
       SignUpScreen: undefined;
-      HomeTabNavigator: HomeTabParamList | undefined;
       RemoteConfigScreen: undefined;
+      ABTest1: undefined;
+      HomeTabNavigator: HomeTabParamList | undefined;
     };
 
     export type HomeStackParamList = {

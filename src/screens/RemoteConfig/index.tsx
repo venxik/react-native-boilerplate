@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { RefreshControl } from 'react-native';
 
 export default function RemoteConfig() {
-  const [config, setConfig] = useState<any>([]);
+  const [config, setConfig] = useState<Array<ObjectConstructor>>([]);
   const [isFetched, setIsFetched] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const fetchRemoteData = async () => {
