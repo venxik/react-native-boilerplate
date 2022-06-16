@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import 'react-native-gesture-handler/jestSetup';
 import AbortController from 'abort-controller';
 import { fetch, Headers, Request, Response } from 'cross-fetch';
+import * as ReactNative from 'react-native';
 
 global.fetch = fetch;
 global.Headers = Headers;
@@ -37,14 +38,17 @@ jest.mock('@react-native-firebase/app');
 
 // jest.mock('@react-native-firebase/database');
 
-// jest.mock('@react-native-firebase/messaging', () => () => ({
-//   hasPermission: jest.fn(() => Promise.resolve(true)),
-//   subscribeToTopic: jest.fn(),
-//   unsubscribeFromTopic: jest.fn(),
-//   requestPermission: jest.fn(() => Promise.resolve(true)),
-//   getToken: jest.fn(() => Promise.resolve('myMockToken')),
-//   onTokenRefresh: jest.fn((callback) => callback(Promise.resolve('Example'))),
-// }));
+jest.mock('@react-native-firebase/messaging', () => () => ({
+  hasPermission: jest.fn(() => Promise.resolve(true)),
+  subscribeToTopic: jest.fn(),
+  unsubscribeFromTopic: jest.fn(),
+  requestPermission: jest.fn(() => Promise.resolve(true)),
+  getToken: jest.fn(() => Promise.resolve('myMockToken')),
+  onMessage: jest.fn(),
+  setBackgroundMessageHandler: jest.fn(),
+  onNotificationOpenedApp: jest.fn(),
+  getInitialNotification: jest.fn(() => Promise.resolve(false)),
+}));
 jest.mock('@react-native-firebase/remote-config', () => () => ({
   fetchAndActivate: jest.fn().mockReturnValue(Promise.resolve()),
   fetch: jest.fn().mockReturnValue(Promise.resolve()),
@@ -65,3 +69,23 @@ jest.mock('@react-native-firebase/crashlytics', () => () => ({
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
 require('jest-fetch-mock').enableMocks();
+
+jest.doMock('react-native', () => {
+  return Object.setPrototypeOf(
+    {
+      Platform: {
+        OS: 'android',
+        select: () => {},
+      },
+      NativeModules: {
+        ...ReactNative.NativeModules,
+        NotifeeApiModule: {
+          addListener: jest.fn(),
+          eventsAddListener: jest.fn(),
+          eventsNotifyReady: jest.fn(),
+        },
+      },
+    },
+    ReactNative,
+  );
+});

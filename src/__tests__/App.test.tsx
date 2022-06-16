@@ -1,6 +1,6 @@
-import { render } from '@testing-library/react-native';
 import React from 'react';
 import App from '../index';
+import { render } from '../__mocks__/wrapper';
 
 describe('Testing App', () => {
   test('should render App correctly', () => {
