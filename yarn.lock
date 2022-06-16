@@ -2375,6 +2375,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-8.3.1.tgz#c880407c660475d1fa0afa92fa259aae0e9e2dc9"
   integrity sha512-CYZXW3wZJ8Ac7FQjrDfqITFZ6Ex+dCOOKQv0LvjQUI811otSBATyEZrBVWc+1GpZExbKTlulyE0X3W4v5YN1hQ==
 
+"@react-native-firebase/analytics@^14.11.0":
+  version "14.11.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-14.11.0.tgz#99a3bb96f0ed6362907a120a40489f9a8bcf9ccd"
+  integrity sha512-hYc2avm4S1vicBdKLtBif87SFGru85LOMPqDblC9GM7cGFRR5WlkOiECvNTzzs+a5Jrfq1zPJsK1YQKxD7CRfQ==
+
 "@react-native-firebase/app@^14.11.0":
   version "14.11.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-14.11.0.tgz#41b1b7d41f51b6880ebad6a12ff87c85bcdab0d6"
@@ -2391,6 +2396,11 @@
   dependencies:
     "@expo/config-plugins" "^4.1.5"
     stacktrace-js "^2.0.0"
+
+"@react-native-firebase/remote-config@^14.11.0":
+  version "14.11.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/remote-config/-/remote-config-14.11.0.tgz#f3e0fabb2c1794fea466eba034df242b32d3cdd4"
+  integrity sha512-yZ9fu3ckZ55t3nrtDnZ5ju60dzMuu24+xhrFHMnYBfc2jeUekwB6R3qXt9rurguT89XHCUOXWUtHvzZf+T14hA==
 
 "@react-native-masked-view/masked-view@^0.2.6":
   version "0.2.6"
