@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AddIcon, useTheme } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { Home, RemoteConfig, Setting, SignIn, SignUp, Splash } from '../screens';
+import { ABTest1, Home, RemoteConfig, Setting, SignIn, SignUp, Splash } from '../screens';
 
 const SignInStack = createNativeStackNavigator<ReactNavigation.SignInStackParamList>();
 export function SignInStackNavigator() {
@@ -14,6 +14,7 @@ export function SignInStackNavigator() {
       <SignInStack.Screen name="SignUpScreen" component={SignUp} />
       <SignInStack.Screen name="HomeTabNavigator" component={HomeTabNavigator} />
       <SignInStack.Screen name="RemoteConfigScreen" component={RemoteConfig} />
+      <SignInStack.Screen name="ABTest1" component={ABTest1} />
     </SignInStack.Navigator>
   );
 }
