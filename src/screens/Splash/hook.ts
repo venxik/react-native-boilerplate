@@ -15,7 +15,7 @@ export const useSplash = () => {
       duration: 3000,
       easing: Easing.linear,
       useNativeDriver: false,
-    }).start(() => startImageRotateFunction());
+    }).start();
   };
 
   const rotateData = rotateValueHolder.interpolate({
@@ -35,6 +35,6 @@ export const useSplash = () => {
 
   return {
     rotateData,
-    startImageRotateFunction,
+    // startImageRotateFunction,
   };
 };

@@ -25,7 +25,7 @@ React Native boilerplate repository version 0.0.1
    - [Simple Fastlane and Firebase integration](https://github.com/JesuHrz/distribution-with-firebase-and-fastlane)
 5. Configure your env with [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv)
 6. Using [Atomic Design Pattern](https://paulonteri.com/thoughts/atomic-design-react)
-7. Using [Redux](https://redux.js.org/), [Redux Toolkit and Redux Toolkit Query](https://redux-toolkit.js.org/)
+7. Using [Redux](https://redux.js.org/), [Redux Toolkit](https://redux-toolkit.js.org/) and [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for services
 8. Using [Native Base](https://nativebase.io/) UI material to design this boilerplate
 
 ### 🚚 How to run, and build Apk
@@ -381,4 +381,119 @@ A brief description of the layout:
 - `.github` has one github workflows directory.
 - `android` is android configuration directory.
 - `ios` is ios configuration directory.
-- `.gitignore` varies per project, but most of it uses create react-native app base .gitignore file
+- `.gitignore` varies per project, but most of it uses create react-native app base .gitignore file.
+
+### Jest example to mock service response
+
+You can see the example in `src/components/organisms/__tests__` based on [this article](https://medium.com/@johnmcdowell0801/testing-rtk-query-with-jest-cdfa5aaf3dc1).
+
+```javascript
+import React from 'react';
+import FOProductsSection from '../FOProductsSection';
+import { AllTheProviders, render } from '../../../__mocks__/wrapper';
+import { renderHook } from '@testing-library/react-hooks/native';
+import { useGetProductQuery } from '../../../services';
+import { products } from '../../../__mocks__/testData';
+
+const updateTimeout = 5000;
+
+beforeEach(() => {
+  fetchMock.resetMocks(); //reset fetchmock before each test case runs
+});
+
+describe('FOProductsSection screen', () => {
+  it('handles good response', async () => {
+    fetchMock.mockResponse(JSON.stringify({ data: products })); // we mock the wanted response here
+    const { result, waitForNextUpdate } = renderHook(() => useGetProductQuery(undefined), {
+      wrapper: AllTheProviders,
+    });
+    const { getByText, container } = render(<FOProductsSection query={'Apple'} />);
+
+    const initialResponse = result.current;
+    expect(initialResponse.data).toBeUndefined();
+    expect(initialResponse.isLoading).toBe(true);
+    expect(getByText('Loading')).toBeDefined();
+    await waitForNextUpdate({ timeout: updateTimeout });
+    expect(container).toBeDefined();
+
+    const nextResponse = result.current;
+    expect(nextResponse.data).not.toBeUndefined();
+    expect(nextResponse.isLoading).toBe(false);
+    expect(nextResponse.isSuccess).toBe(true);
+  });
+
+  it('handles error response', async () => {
+    fetchMock.mockReject(new Error('Internal Server Error')); //we mock the error response here
+    const { result, waitForNextUpdate } = renderHook(() => useGetProductQuery(undefined), {
+      wrapper: AllTheProviders,
+    });
+    const initialResponse = result.current;
+    expect(initialResponse.data).toBeUndefined();
+    expect(initialResponse.isLoading).toBe(true);
+
+    await waitForNextUpdate({ timeout: updateTimeout });
+
+    const nextResponse = result.current;
+    expect(nextResponse.data).toBeUndefined();
+    expect(nextResponse.isLoading).toBe(false);
+    expect(nextResponse.isError).toBe(true);
+  });
+});
+```
+
+### RTK Query example fetch data
+
+You can see the example in `src/services/products`. This is the only basic api to get data from API, you can learn more from the [official docs](https://redux-toolkit.js.org/rtk-query/overview).
+
+```javascript
+import { createApi } from '@reduxjs/toolkit/dist/query/react';
+import { functionsBaseQuery } from '../baseQuery';
+
+export interface IProductsDetail {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+}
+
+export interface IProducts {
+  products: IProductsDetail[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+const reducerPath = 'productsAPI';
+
+export const productsAPI = createApi({
+  reducerPath: reducerPath,
+  baseQuery: functionsBaseQuery(),
+  tagTypes: ['Products'], //We provide tags that are available for this api
+  keepUnusedDataFor: process.env.NODE_ENV !== 'test' ? 60 : 0,
+  endpoints: (builder) => ({
+    getProduct: builder.query<IProducts, string>({ //Rule of thumb, mutation is used for GET method
+      query: (query) => `/products/search?q=${query}`,
+      providesTags: ['Products'], // We provide the corresponding tags
+    }),
+    refetchProducts: builder.mutation<null, void>({ //Rule of thumb, mutation is used for POST, PATCH, DELETE method
+      // The query is not relevant here, so a `null` returning `queryFn` is used
+      queryFn: () => ({ data: null }),
+      // This mutation takes advantage of tag invalidation behaviour to trigger
+      // any queries that provide the 'Post' or 'User' tags to re-fetch if the queries
+      // are currently subscribed to the cached data.
+      // Meaning if we call this, it will call getProduct to update the cached data
+      invalidatesTags: ['Products'],
+    }),
+  }),
+});
+
+export const { useGetProductQuery } = productsAPI;
+export const productsQueryReducer = { [reducerPath]: productsAPI.reducer };
+```
