@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import analytics from '@react-native-firebase/analytics';
+import { useNavigation } from '@react-navigation/native';
 import {
   AspectRatio,
   Box,
+  Button,
+  Center,
   Heading,
   HStack,
   Image,
   Stack,
   Text,
-  Center,
-  Button,
   View,
 } from 'native-base';
+import React, { useEffect, useState } from 'react';
 import { getRemoteValue, refreshConfig } from '../../utils';
-import analytics from '@react-native-firebase/analytics';
 
 /**
  * @References https://firebase.google.com/docs/ab-testing/abtest-config
@@ -20,6 +21,7 @@ import analytics from '@react-native-firebase/analytics';
 export default function ABTest1() {
   const [experiment, setExperiment] = useState<boolean>(true);
   const [color, setColor] = useState<string>('');
+  const navigation = useNavigation();
   const [variant] = useState({
     one: 'https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg',
     two: 'https://img.beritasatu.com/cache/investor/798x449-2/1597369327.jpg',
@@ -128,6 +130,9 @@ export default function ABTest1() {
           {experiment ? 'Baseline' : 'Variant A'}
         </Text>
         <Button onPress={() => onFetch()}>Refresh</Button>
+        <Button mt={5} onPress={() => navigation.goBack()}>
+          Back
+        </Button>
       </View>
     </Box>
   );
