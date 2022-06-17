@@ -1,6 +1,6 @@
 import analytics from '@react-native-firebase/analytics';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AddIcon, useTheme } from 'native-base';
 import React, { useEffect, useState } from 'react';
@@ -47,6 +47,7 @@ export function HomeTabNavigator() {
     >
       <HomeTab.Screen
         options={{
+          tabBarTestID: 'home-tab',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <AddIcon color={focused ? colors.blue[700] : colors.coolGray[900]} size={'3xl'} />
@@ -57,6 +58,7 @@ export function HomeTabNavigator() {
       />
       <HomeTab.Screen
         options={{
+          tabBarTestID: 'setting-tab',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <AddIcon color={focused ? colors.blue[700] : colors.coolGray[900]} size={'3xl'} />
@@ -86,8 +88,8 @@ export function SplashNavigator() {
 
 function Router() {
   const [loading, setLoading] = useState(true);
-  const routeNameRef = React.useRef<any>();
-  const navigationRef = React.useRef<any>();
+  const routeNameRef = React.useRef<unknown>();
+  const navigationRef = useNavigationContainerRef();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -103,11 +105,11 @@ function Router() {
     <NavigationContainer
       ref={navigationRef}
       onReady={() => {
-        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+        routeNameRef.current = navigationRef.getCurrentRoute().name;
       }}
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
-        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        const currentRouteName = navigationRef.getCurrentRoute().name;
 
         if (previousRouteName !== currentRouteName) {
           await analytics().logScreenView({

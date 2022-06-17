@@ -17,7 +17,6 @@ describe('FOProductsSection screen', () => {
     // jest
     //   .spyOn(hooks, 'useGetProductQuery')
     //   .mockRejectedValue({ data: products, isError: false, isLoading: false });
-
     fetchMock.mockResponse(JSON.stringify({ data: products }));
     const { result, waitForNextUpdate } = renderHook(() => useGetProductQuery(undefined), {
       wrapper: AllTheProviders,
@@ -28,16 +27,11 @@ describe('FOProductsSection screen', () => {
     expect(initialResponse.data).toBeUndefined();
     expect(initialResponse.isLoading).toBe(true);
     expect(getByText('Loading')).toBeDefined();
-    // expect(getByTestId('scrollview')).toBeDefined();
     await waitForNextUpdate({ timeout: updateTimeout });
-    // await act(async () => {
-    //   // await waitForNextUpdate({ timeout: updateTimeout });
-    //   expect(getByTestId('scrollview')).toBeDefined();
-    // });
     expect(container).toBeDefined();
 
     const nextResponse = result.current;
-    expect(nextResponse.data).not.toBeUndefined();
+    expect(nextResponse.data).toBeDefined();
     expect(nextResponse.isLoading).toBe(false);
     expect(nextResponse.isSuccess).toBe(true);
   });

@@ -8,7 +8,7 @@ export default function SignUp(): JSX.Element {
   const { hidePassword, offsetKeyboard, onSubmit, form } = useSignUp();
 
   return (
-    <Box safeArea flex={1}>
+    <Box safeArea flex={1} testID="signup-screen">
       <KeyboardAvoidingView flex={1} keyboardVerticalOffset={offsetKeyboard}>
         <Center flex={1} px={10}>
           <Text fontSize={'3xl'} color={'blue.500'} mb={50}>

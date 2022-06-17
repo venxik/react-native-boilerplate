@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, ScrollView, Text } from 'native-base';
-import { ProductsCard } from '../../molecules';
+import { FMProductsCard } from '../../molecules';
 import { IProductsDetail, useGetProductQuery } from '../../../services/products';
 
 type IFOProductsSectionProps = {
@@ -18,21 +18,25 @@ export default function FOProductsSection({ query }: IFOProductsSectionProps) {
   }, [query]);
 
   return (
-    <Box flex={1} height={'100%'}>
+    <Box flex={1} height={'100%'} testID={'FOProductsSection'}>
       {error ? (
         <Text alignSelf="center" testID="error-text">
           There was an error
         </Text>
       ) : isFetching ? (
-        <Text alignSelf="center">Loading</Text>
-      ) : data ? (
-        <ScrollView flex={1} p={'4'} testID={'scrollview'}>
+        <Text alignSelf="center" testID="txt-loading">
+          Loading
+        </Text>
+      ) : data && data.products.length > 0 ? (
+        <ScrollView flex={1} p={'4'}>
           {data?.products?.map((v: IProductsDetail) => (
-            <ProductsCard desc={v.description} name={v.title} image={v.thumbnail} key={v.id} />
+            <FMProductsCard desc={v.description} name={v.title} image={v.thumbnail} key={v.id} />
           ))}
         </ScrollView>
       ) : (
-        <Text alignSelf={'center'}>No data</Text>
+        <Text alignSelf={'center'} testID="txt-no-data">
+          No data
+        </Text>
       )}
     </Box>
   );

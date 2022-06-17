@@ -10,7 +10,7 @@ export default function Home(): JSX.Element {
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   return (
-    <Box flex={1} safeAreaTop>
+    <Box flex={1} safeAreaTop testID="home-screen">
       <Heading px={4}>Home</Heading>
       <Button.Group
         isAttached
