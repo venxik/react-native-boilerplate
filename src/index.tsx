@@ -1,20 +1,28 @@
+import notifee from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import { NativeBaseProvider } from 'native-base';
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import notifee, { EventType } from '@notifee/react-native';
 import { useLayout, useNotification } from './hooks';
 import Router from './navigation';
 import { persistor, store } from './redux';
 import { themes } from './theme';
 import { fetchConfig } from './utils';
+import { utils } from '@react-native-firebase/app';
+import analytics from '@react-native-firebase/analytics';
 
 useLayout().setupLayoutAnimation();
 fetchConfig();
 
 function App() {
   const { displayNotification } = useNotification();
+
+  async function bootstrap() {
+    if (utils().isRunningInTestLab) {
+      await analytics().setAnalyticsCollectionEnabled(false);
+    }
+  }
 
   async function requestUserPermission() {
     await messaging().requestPermission();
@@ -32,8 +40,10 @@ function App() {
 
   useEffect(() => {
     requestUserPermission();
+    bootstrap();
 
-    notifee.onBackgroundEvent(async ({ type }) => {
+    // notifee.onBackgroundEvent(async ({ type }) => {
+    notifee.onBackgroundEvent(async () => {
       // if (type === EventType.PRESS) {
       // console.log('User pressed the notification.', detail.pressAction.id);
       // }
