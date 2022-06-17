@@ -88,6 +88,7 @@ If there is error, try to run with Xcode
 
 1. development
 2. production
+3. staging
 
 To be added more.
 
@@ -383,6 +384,94 @@ A brief description of the layout:
 - `ios` is ios configuration directory.
 - `.gitignore` varies per project, but most of it uses create react-native app base .gitignore file.
 
+### RTK Query example fetch data
+
+You can see the example in `src/services/products`. This is the only basic api to get data from API, you can learn more from the [official docs](https://redux-toolkit.js.org/rtk-query/overview).
+
+```javascript
+import { createApi } from '@reduxjs/toolkit/dist/query/react';
+import { functionsBaseQuery } from '../baseQuery';
+
+export interface IProductsDetail {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+}
+
+export interface IProducts {
+  products: IProductsDetail[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+const reducerPath = 'productsAPI';
+
+export const productsAPI = createApi({
+  reducerPath: reducerPath,
+  baseQuery: functionsBaseQuery(),
+  tagTypes: ['Products'], //We provide tags that are available for this api
+  keepUnusedDataFor: process.env.NODE_ENV !== 'test' ? 60 : 0,
+  endpoints: (builder) => ({
+    getProduct: builder.query<IProducts, string>({ //Rule of thumb, mutation is used for GET method
+      query: (query) => `/products/search?q=${query}`,
+      providesTags: ['Products'], // We provide the corresponding tags
+    }),
+    refetchProducts: builder.mutation<null, void>({ //Rule of thumb, mutation is used for POST, PATCH, DELETE method
+      // The query is not relevant here, so a `null` returning `queryFn` is used
+      queryFn: () => ({ data: null }),
+      // This mutation takes advantage of tag invalidation behaviour to trigger
+      // any queries that provide the 'Post' or 'User' tags to re-fetch if the queries
+      // are currently subscribed to the cached data.
+      // Meaning if we call this, it will call getProduct to update the cached data
+      invalidatesTags: ['Products'],
+    }),
+  }),
+});
+
+export const { useGetProductQuery } = productsAPI;
+export const productsQueryReducer = { [reducerPath]: productsAPI.reducer };
+```
+
+### :dizzy: Upload "beta" version to Firebase with Fastlane
+
+**This is only for android**. To upload a "beta" version to firebase, you can run command
+
+```shell
+  beta:android
+```
+
+### :smiling_imp: Unit Testing
+
+Unit testing uses jest. You can navigate to [here](./src/screens/__tests__/) to see some unit test examples
+
+### :smiling_imp: Detox end-to-end testing
+
+This boilerplate is already supported with [Detox](https://wix.github.io/Detox/docs/introduction/getting-started/). You can navigate [here](./e2e/tests/) to see some examples.
+You need to change your simulator and emulator name on the `.detoxrc.json` configuration first to be same with the one on your machine so it can work on your machine.
+
+To build and test application run on ios
+
+```shell
+build:e2e-ios-debug
+test:e2e-ios-debug
+```
+
+To build and test application run on android
+
+```shell
+build:e2e-android-debug
+test:e2e-android-debug
+```
+
 ### Jest example to mock service response
 
 You can see the example in `src/components/organisms/__tests__` based on [this article](https://medium.com/@johnmcdowell0801/testing-rtk-query-with-jest-cdfa5aaf3dc1).
@@ -439,61 +528,4 @@ describe('FOProductsSection screen', () => {
     expect(nextResponse.isError).toBe(true);
   });
 });
-```
-
-### RTK Query example fetch data
-
-You can see the example in `src/services/products`. This is the only basic api to get data from API, you can learn more from the [official docs](https://redux-toolkit.js.org/rtk-query/overview).
-
-```javascript
-import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import { functionsBaseQuery } from '../baseQuery';
-
-export interface IProductsDetail {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-}
-
-export interface IProducts {
-  products: IProductsDetail[];
-  total: number;
-  skip: number;
-  limit: number;
-}
-
-const reducerPath = 'productsAPI';
-
-export const productsAPI = createApi({
-  reducerPath: reducerPath,
-  baseQuery: functionsBaseQuery(),
-  tagTypes: ['Products'], //We provide tags that are available for this api
-  keepUnusedDataFor: process.env.NODE_ENV !== 'test' ? 60 : 0,
-  endpoints: (builder) => ({
-    getProduct: builder.query<IProducts, string>({ //Rule of thumb, mutation is used for GET method
-      query: (query) => `/products/search?q=${query}`,
-      providesTags: ['Products'], // We provide the corresponding tags
-    }),
-    refetchProducts: builder.mutation<null, void>({ //Rule of thumb, mutation is used for POST, PATCH, DELETE method
-      // The query is not relevant here, so a `null` returning `queryFn` is used
-      queryFn: () => ({ data: null }),
-      // This mutation takes advantage of tag invalidation behaviour to trigger
-      // any queries that provide the 'Post' or 'User' tags to re-fetch if the queries
-      // are currently subscribed to the cached data.
-      // Meaning if we call this, it will call getProduct to update the cached data
-      invalidatesTags: ['Products'],
-    }),
-  }),
-});
-
-export const { useGetProductQuery } = productsAPI;
-export const productsQueryReducer = { [reducerPath]: productsAPI.reducer };
 ```

@@ -7,9 +7,10 @@ describe('SignIn screen', () => {
     await expect(element(by.id('signin-screen'))).toBeVisible();
   });
 
-  it('can input values and show/hide password', async () => {
+  it('can input values', async () => {
     await element(by.id('input-email')).typeText('this is email');
     await element(by.id('input-password')).typeText('this is password');
+    await element(by.id('input-password')).tapReturnKey();
   });
 
   it('can show or hide password', async () => {

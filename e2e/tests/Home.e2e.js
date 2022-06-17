@@ -20,6 +20,7 @@ describe('Home screen', () => {
   });
 
   it('can change products query and show no data', async () => {
+    await element(by.id('input-products')).clearText();
     await element(by.id('input-products')).typeText('sadbqeidq dquwdqwo');
     await expect(element(by.id('txt-no-data'))).toBeVisible();
   });
