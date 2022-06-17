@@ -1,15 +1,15 @@
 import { Box, Button, Center, Input, KeyboardAvoidingView, Text } from 'native-base';
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Controller } from 'react-hook-form';
+import { Platform } from 'react-native';
 import { useSignUp } from './hook';
 
 export default function SignUp(): JSX.Element {
-  const { hidePassword, offsetKeyboard, onSubmit, form } = useSignUp();
+  const { hidePassword, onSubmit, form } = useSignUp();
 
   return (
     <Box safeArea flex={1} testID="signup-screen">
-      <KeyboardAvoidingView flex={1} keyboardVerticalOffset={offsetKeyboard}>
+      <KeyboardAvoidingView flex={1} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <Center flex={1} px={10}>
           <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
             SignUp

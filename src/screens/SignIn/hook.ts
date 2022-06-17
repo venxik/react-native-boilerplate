@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import crashlytics from '@react-native-firebase/crashlytics';
 import analytics from '@react-native-firebase/analytics';
@@ -14,10 +13,6 @@ export const useSignIn = () => {
   // STATE
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const navigation = useNavigation<NavigationProp>();
-  const offsetKeyboard = Platform.select({
-    ios: 0,
-    android: 30,
-  });
 
   // HANDLER
   const onToggleHidePassword = () => {
@@ -49,5 +44,5 @@ export const useSignIn = () => {
     };
   }, []);
 
-  return { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome, goToSignUp };
+  return { hidePassword, onToggleHidePassword, goToHome, goToSignUp };
 };

@@ -14,14 +14,15 @@ import {
 } from 'native-base';
 import { useSignIn } from './hook';
 import { WHAT_ENV } from 'react-native-dotenv';
+import { Platform } from 'react-native';
 
 export default function SignIn(): JSX.Element {
-  const { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome, goToSignUp } = useSignIn();
+  const { hidePassword, onToggleHidePassword, goToHome, goToSignUp } = useSignIn();
   const { colors } = useTheme();
 
   return (
     <Box safeArea flex={1} testID="signin-screen">
-      <KeyboardAvoidingView flex={1} keyboardVerticalOffset={offsetKeyboard}>
+      <KeyboardAvoidingView flex={1} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <Center flex={1} px={10}>
           <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
             SignIn

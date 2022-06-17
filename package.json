@@ -6,11 +6,10 @@
     "prepare": "husky install",
     "run:android-debug": "npx react-native run-android",
     "run:android-release": "npx react-native run-android --variant=release",
-    "run:android-staging": "npx react-native run-android --variant=staging",
-    "release:android": "cd android && ./gradlew assembleRelease",
     "run:ios-debug": "NODE_ENV=debug npx react-native run-ios",
     "run:ios-release": "NODE_ENV=release npx react-native run-ios --configuration=Release",
-    "run:ios-staging": "NODE_ENV=staging npx react-native run-ios --scheme=StagingBoilerplate",
+    "release:android": "cd android && ./gradlew assembleRelease",
+    "android:local": "adb reverse tcp:8081 tcp:8081",
     "start": "react-native start --reset-cache",
     "release": "standard-version",
     "test": "jest --verbose",
@@ -28,10 +27,10 @@
     "start:staging": "NODE_ENV=staging npx react-native start --reset-cache",
     "start:release": "NODE_ENV=production npx react-native start --reset-cache",
     "beta:android": "cd ./android && fastlane beta",
-    "build:e2e-ios-debug": "detox build -c ios",
-    "test:e2e-ios-debug": "detox test -c ios",
-    "build:e2e-android-debug": "detox build -c android",
-    "test:e2e-android-debug": "detox test -c android"
+    "build:e2e-ios-debug": "detox build -c ios.sim.debug",
+    "test:e2e-ios-debug": "detox test -c ios.sim.debug",
+    "build:e2e-android-debug": "detox build -c android.sim.debug",
+    "test:e2e-android-debug": "detox test -c android.sim.debug"
   },
   "dependencies": {
     "@jest/globals": "^28.1.0",

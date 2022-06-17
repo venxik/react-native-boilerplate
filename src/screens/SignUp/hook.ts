@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useForm } from 'react-hook-form';
 import crashlytics from '@react-native-firebase/crashlytics';
@@ -24,10 +23,6 @@ export const useSignUp = () => {
   const form = useForm<FormData>();
 
   const navigation = useNavigation<NavigationProp>();
-  const offsetKeyboard = Platform.select({
-    ios: 0,
-    android: 30,
-  });
 
   // HANDLER
   const onToggleHidePassword = () => {
@@ -53,7 +48,7 @@ export const useSignUp = () => {
           passwordConfirmation: data.passwordConfirmation,
         }),
       ]);
-      crashlytics().crash();
+      // crashlytics().crash();
       // call.undefined.function();
     } catch (error: unknown) {
       crashlytics().recordError(error as Error);
@@ -71,5 +66,5 @@ export const useSignUp = () => {
     };
   }, []);
 
-  return { hidePassword, offsetKeyboard, onToggleHidePassword, goToSignIn, onSubmit, form };
+  return { hidePassword, onToggleHidePassword, goToSignIn, onSubmit, form };
 };
