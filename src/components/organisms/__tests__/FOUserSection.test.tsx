@@ -25,16 +25,11 @@ describe('FOUserSection screen', () => {
     expect(initialResponse.data).toBeUndefined();
     expect(initialResponse.isLoading).toBe(true);
     expect(getByText('Loading')).toBeDefined();
-    // expect(getByTestId('scrollview')).toBeDefined();
     await waitForNextUpdate({ timeout: updateTimeout });
-    // await act(async () => {
-    //   // await waitForNextUpdate({ timeout: updateTimeout });
-    //   expect(getByTestId('scrollview')).toBeDefined();
-    // });
     expect(container).toBeDefined();
 
     const nextResponse = result.current;
-    expect(nextResponse.data).not.toBeUndefined();
+    expect(nextResponse.data).toBeDefined();
     expect(nextResponse.isLoading).toBe(false);
     expect(nextResponse.isSuccess).toBe(true);
   });
@@ -47,7 +42,6 @@ describe('FOUserSection screen', () => {
     const initialResponse = result.current;
     expect(initialResponse.data).toBeUndefined();
     expect(initialResponse.isLoading).toBe(true);
-
     await waitForNextUpdate({ timeout: updateTimeout });
 
     const nextResponse = result.current;
