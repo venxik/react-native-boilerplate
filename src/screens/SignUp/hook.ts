@@ -2,11 +2,9 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useForm } from 'react-hook-form';
 import crashlytics from '@react-native-firebase/crashlytics';
 import analytics from '@react-native-firebase/analytics';
-import { call } from 'react-native-reanimated';
 
 type NavigationProp = NativeStackNavigationProp<
   ReactNavigation.SignInStackParamList,
@@ -55,10 +53,10 @@ export const useSignUp = () => {
           passwordConfirmation: data.passwordConfirmation,
         }),
       ]);
-      // crashlytics().crash();
-      call.undefined.function();
-    } catch (error: Error) {
-      crashlytics().recordError(error);
+      crashlytics().crash();
+      // call.undefined.function();
+    } catch (error: unknown) {
+      crashlytics().recordError(error as Error);
     }
   };
 

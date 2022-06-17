@@ -5,7 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { RefreshControl } from 'react-native';
 
 export default function RemoteConfig() {
-  const [config, setConfig] = useState<Array<ObjectConstructor>>([]);
+  const [config, setConfig] = useState<
+    Array<{ key?: unknown; item?: unknown; source?: unknown; value?: unknown }>
+  >([]);
   const [isFetched, setIsFetched] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const navigation = useNavigation();
@@ -50,7 +52,7 @@ export default function RemoteConfig() {
     };
   }, [isFetched]);
   return (
-    <Box style={{ flex: 1 }}>
+    <Box style={{ flex: 1 }} testID="remote-config-screen">
       <Heading fontSize="xl" p="4" pb="3">
         Remote Config
       </Heading>
@@ -102,12 +104,12 @@ export default function RemoteConfig() {
             </HStack>
           </Box>
         )}
-        keyExtractor={(item) => item.key}
+        keyExtractor={(item) => item.key as string}
       />
       <Button style={{ marginHorizontal: 20 }} onPress={fetchRemoteData}>
         Fetch
       </Button>
-      <Button style={{ margin: 20 }} onPress={() => navigation.goBack()}>
+      <Button style={{ margin: 20 }} onPress={() => navigation.goBack()} testID="btn-back">
         Back
       </Button>
     </Box>

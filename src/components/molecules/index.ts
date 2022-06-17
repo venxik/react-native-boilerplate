@@ -1,4 +1,4 @@
-import UsersCard from './FMUsersCard';
-import ProductsCard from './FMProductsCard';
+import FMUsersCard from './FMUsersCard';
+import FMProductsCard from './FMProductsCard';
 
-export { UsersCard, ProductsCard };
+export { FMUsersCard, FMProductsCard };

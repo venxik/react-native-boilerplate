@@ -13,17 +13,21 @@ import {
   WarningTwoIcon,
 } from 'native-base';
 import { useSignIn } from './hook';
+import { WHAT_ENV } from 'react-native-dotenv';
 
 export default function SignIn(): JSX.Element {
   const { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome, goToSignUp } = useSignIn();
   const { colors } = useTheme();
 
   return (
-    <Box safeArea flex={1}>
+    <Box safeArea flex={1} testID="signin-screen">
       <KeyboardAvoidingView flex={1} keyboardVerticalOffset={offsetKeyboard}>
         <Center flex={1} px={10}>
           <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
             SignIn
+          </Text>
+          <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
+            {WHAT_ENV}
           </Text>
           <Input
             p={4}
@@ -69,7 +73,7 @@ export default function SignIn(): JSX.Element {
             <Text fontSize={'md'} color={'blue.500'} mr={1}>
               Don't have account?
             </Text>
-            <Text fontSize={'md'} color={'blue.500'} onPress={goToSignUp}>
+            <Text fontSize={'md'} color={'blue.500'} onPress={goToSignUp} testID="btn-signup">
               Register
             </Text>
           </View>

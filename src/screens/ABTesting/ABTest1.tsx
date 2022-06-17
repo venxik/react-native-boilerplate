@@ -39,7 +39,7 @@ export default function ABTest1() {
     onFetch();
   }, []);
   return (
-    <Box mt={5} flex={1}>
+    <Box mt={5} flex={1} testID="ab-testing-screen">
       <Box
         maxW="80"
         rounded="lg"
@@ -130,7 +130,7 @@ export default function ABTest1() {
           {experiment ? 'Baseline' : 'Variant A'}
         </Text>
         <Button onPress={() => onFetch()}>Refresh</Button>
-        <Button mt={5} onPress={() => navigation.goBack()}>
+        <Button mt={5} onPress={() => navigation.goBack()} testID="btn-back">
           Back
         </Button>
       </View>

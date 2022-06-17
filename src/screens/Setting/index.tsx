@@ -23,12 +23,25 @@ export default function Setting() {
     bootstrap();
   }, []);
   return (
-    <SafeAreaView style={{ flex: 1, padding: 20, justifyContent: 'center' }}>
-      <Button onPress={() => navigation.navigate('RemoteConfigScreen')}>Remote Config Demo</Button>
-      <Button style={{ marginTop: 20 }} onPress={() => navigation.navigate('ABTest1')}>
+    <SafeAreaView
+      style={{ flex: 1, padding: 20, justifyContent: 'center' }}
+      testID="setting-screen"
+    >
+      <Button onPress={() => navigation.navigate('RemoteConfigScreen')} testID="btn-remote-config">
+        Remote Config Demo
+      </Button>
+      <Button
+        style={{ marginTop: 20 }}
+        onPress={() => navigation.navigate('ABTest1')}
+        testID="btn-ab-testing"
+      >
         A/B Testing Demo
       </Button>
-      <Button style={{ marginTop: 20 }} onPress={() => handleDisplayNotification()}>
+      <Button
+        style={{ marginTop: 20 }}
+        onPress={() => handleDisplayNotification()}
+        testID="btn-notification"
+      >
         Local Push Notification Demo
       </Button>
       <Button
