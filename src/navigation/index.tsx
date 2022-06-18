@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AddIcon, useTheme } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { ABTest1, Home, RemoteConfig, Setting, SignIn, SignUp, Splash } from '../screens';
+import { DdRumReactNavigationTracking } from '@datadog/mobile-react-navigation';
 
 const SignInStack = createNativeStackNavigator<ReactNavigation.SignInStackParamList>();
 export function SignInStackNavigator() {
@@ -116,6 +117,7 @@ function Router() {
             screen_name: currentRouteName,
             screen_class: currentRouteName,
           });
+          DdRumReactNavigationTracking.startTrackingViews(navigationRef);
         }
         routeNameRef.current = currentRouteName;
       }}
