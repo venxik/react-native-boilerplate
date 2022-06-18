@@ -13,7 +13,7 @@ import {
   WarningTwoIcon,
 } from 'native-base';
 import { useSignIn } from './hook';
-import { WHAT_ENV } from 'react-native-dotenv';
+import Config from 'react-native-config';
 import { Platform } from 'react-native';
 
 export default function SignIn(): JSX.Element {
@@ -28,7 +28,7 @@ export default function SignIn(): JSX.Element {
             SignIn
           </Text>
           <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
-            {WHAT_ENV}
+            {Config.WHAT_ENV}
           </Text>
           <Input
             p={4}
