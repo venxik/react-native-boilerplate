@@ -4,6 +4,8 @@ React Native boilerplate repository version 0.0.1
 
 ## ⚡️Getting Started
 
+Make sure you already React Native environment running in you machine. Please refer to the official [docs](https://reactnative.dev/docs/getting-started)
+
 ### :hammer_and_pick: Configurations
 
 1. Change package name, bundle id (iOS) or application id (android).
@@ -32,57 +34,65 @@ React Native boilerplate repository version 0.0.1
 
 NOTES: This boilerplate uses `yarn` as main command, not `npm`.
 
-Example how to run android with development env
 Make sure to open android simulator or connect android devices.
+To make sure android emulator have the same port with metro bundler, run this command first
+
+```shell
+yarn android:local
+```
+
+Example how to run android with development env
+
+```shell
+yarn android:local
+yarn run:android-debug
+```
+
+Example how to run android with staging env
 
 ```shell
 //To make sure devices have the same port with metro bundler
-adb reverse tcp:8081 tcp:8081
-
-yarn start:staging
-yarn run:android
+yarn android:local
+yarn run:android-staging
 ```
-
-If there is error, try to run with android studio
 
 Example how to run android with release env
 
 ```shell
 //To make sure devices have the same port with metro bundler
-adb reverse tcp:8081 tcp:8081
-
-yarn start:release
-yarn run:android
+yarn android:local
+yarn run:android-prod
 ```
 
-If there is error, try to run with android studio
+If there is any error when running these commands, try to run with Android Studio
 
-Example how to build android release variant
+Example how to build android with prod env release variant
 
 ```shell
-yarn start:release
 yarn release:android
 ```
 
-If there is error, try to build with android studio
+If there is any error when running this command, try to build with Android Studio
 
 Example how to run ios with development env
 
 ```shell
-yarn start:staging
-yarn run:ios
+yarn run:ios-debug
 ```
 
-If there is error, try to run with Xcode
+Example how to run ios with staging env
+
+```shell
+yarn run:ios-staging
+```
 
 Example how to run ios with release env
 
 ```shell
-yarn start:release
-yarn run:ios
+yarn run:ios-prod
 ```
 
-If there is error, try to run with Xcode
+If there is any error when running these commands, try to run with Xcode
 
 ### ⚙️ Supported Flavor
 
@@ -90,7 +100,9 @@ If there is error, try to run with Xcode
 2. production
 3. staging
 
-To be added more.
+In android there are 3 product flavor: `dev`, `prod`, `staging`.
+In ios there are 3 scheme: `Boilerplate`, `Boilerplate Prod`, `Boilerplate Staging`.
+All of them are already correspond with the env.
 
 ### :test_tube: How to Test Coverage
 
@@ -455,21 +467,21 @@ Unit testing uses jest. You can navigate to [here](./src/screens/__tests__/) to 
 
 ### :smiling_imp: Detox end-to-end testing
 
-This boilerplate is already supported with [Detox](https://wix.github.io/Detox/docs/introduction/getting-started/). You can navigate [here](./e2e/tests/) to see some examples.
+This boilerplate is already supported with [Detox](https://wix.github.io/Detox/docs/introduction/getting-started/). You can navigate [here](./e2e/tests/) to see some examples. All available configs are on `.detoxrc.json` file.
 You need to change your simulator and emulator name on the `.detoxrc.json` configuration first to be same with the one on your machine so it can work on your machine.
 
 To build and test application run on ios
 
 ```shell
-build:e2e-ios-debug
-test:e2e-ios-debug
+build:e2e-ios-dev-debug
+test:e2e-ios-dev-debug
 ```
 
 To build and test application run on android
 
 ```shell
-build:e2e-android-debug
-test:e2e-android-debug
+build:e2e-android-dev-debug
+test:e2e-android-dev-debug
 ```
 
 ### Jest example to mock service response
