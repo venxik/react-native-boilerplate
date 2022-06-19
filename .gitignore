@@ -61,11 +61,16 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
+# Jest
 .jest
 .coverage
 
+# Config Environment
 .env.development
 .env.production
 
 # react-native-config codegen
 ios/tmp.xcconfig
+
+# Code Editor
+.vscode
