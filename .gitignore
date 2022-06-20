@@ -28,8 +28,7 @@ build/
 .gradle
 local.properties
 google-services.json
-/android/firebase_credentials.json
-android/app/google-services.json
+firebase_credentials.json
 GoogleService-Info.plist
 *.iml
 *.hprof
@@ -71,6 +70,7 @@ buck-out/
 # Config Environment
 .env.development
 .env.production
+.env.staging
 
 # react-native-config codegen
 ios/tmp.xcconfig
