@@ -1,4 +1,25 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services'
+
+//project.ext.envConfigFiles = [
+//    debug: ".env.development",
+//    release: ".env.production",
+//    staging: ".env.staging"
+//]
+
+ project.ext.envConfigFiles = [
+     devdebug: ".env.development",
+     devrelease: ".env.development",
+     stagingdebug: ".env.staging",
+     stagingrelease: ".env.staging",
+     proddebug: ".env.production",
+     prodrelease: ".env.production",
+ ]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+// Apply the Firebase Crashlytics Plugin
+apply plugin: 'com.google.firebase.crashlytics'
 
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
@@ -135,12 +156,16 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.boilerplate"
+        resValue "string", "build_config_package", "com.finetiks.rnboilerplate"
+        applicationId "com.finetiks.rnboilerplate"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 4
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+        testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        missingDimensionStrategy 'detox', 'full'
 
         if (isNewArchitectureEnabled()) {
             // We configure the NDK build only if you decide to opt-in for the New Architecture.
@@ -223,6 +248,16 @@ android {
         }
     }
     signingConfigs {
+        release {
+            def keystorePropertiesFile = rootProject.file("keystore.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -237,11 +272,29 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            // Detox-specific additions to pro-guard
+            proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
+
+            // Enable Crashlytics NDK reporting
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+            }
         }
     }
+
+     flavorDimensions "default"
+     productFlavors {
+         dev{
+         }
+         staging {
+         }
+         prod {
+         }
+     }
 
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
@@ -261,6 +314,9 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.4.2' // (check what the latest version is!)
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion
@@ -288,6 +344,7 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+    androidTestImplementation(project(path: ":detox"))
 }
 
 if (isNewArchitectureEnabled()) {
@@ -311,6 +368,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 
+// FIX DATADOG ISSUE WHEN BUILD APK
+rootProject.project(":datadog_mobile-react-native").afterEvaluate { ddSdkProject ->
+    def androidExtension = ddSdkProject.extensions.getByName("android") as com.android.build.gradle.LibraryExtension
+    androidExtension.defaultConfig.minSdkVersion 21
+}
+
 def isNewArchitectureEnabled() {
     // To opt-in for the New Architecture, you can either:
     // - Set `newArchEnabled` to true inside the `gradle.properties` file
@@ -318,9 +381,3 @@ def isNewArchitectureEnabled() {
     // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
     return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
 }
-
-project.ext.vectoricons = [
-    iconFontNames: [ 'AntDesign.ttf','FontAwesome.ttf','FontAwesome5_Brands.ttf','FontAwesome5_Regular.ttf','FontAwesome5_Solid.ttf','MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
-]
-
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

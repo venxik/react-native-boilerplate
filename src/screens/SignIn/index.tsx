@@ -1,52 +1,85 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View } from 'react-native';
-import { Button, Icon, SafeAreaView, Text, TextInput } from '../../components';
-import { BaseStyle, useTheme } from '../../theme';
+import {
+  Box,
+  Button,
+  Center,
+  IconButton,
+  Input,
+  KeyboardAvoidingView,
+  Text,
+  useTheme,
+  View,
+  WarningIcon,
+  WarningTwoIcon,
+} from 'native-base';
 import { useSignIn } from './hook';
-import { styles } from './styles';
+import Config from 'react-native-config';
+import { Platform } from 'react-native';
 
-export default React.memo(function SignIn(): JSX.Element {
-  const { hidePassword, offsetKeyboard, onToggleHidePassword, goToHome } = useSignIn();
+export default function SignIn(): JSX.Element {
+  const { hidePassword, onToggleHidePassword, goToHome, goToSignUp } = useSignIn();
   const { colors } = useTheme();
 
   return (
-    <SafeAreaView style={BaseStyle.safeAreaView} edges={['right', 'top', 'left']}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={offsetKeyboard}
-        style={{
-          flex: 1,
-        }}
-      >
-        <View style={[BaseStyle.container, styles.container]}>
-          <Text title1 style={styles.textColor}>
+    <Box safeArea flex={1} testID="signin-screen">
+      <KeyboardAvoidingView flex={1} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <Center flex={1} px={10}>
+          <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
             SignIn
           </Text>
-          <TextInput
+          <Text fontSize={'3xl'} color={'blue.500'} mb={50}>
+            {Config.WHAT_ENV}
+          </Text>
+          <Input
+            p={4}
             placeholder="Type Email"
             keyboardType="email-address"
-            style={styles.textInput}
+            mb="10"
+            testID="input-email"
           />
-          <TextInput
+          <Input
+            p={4}
             placeholder="Type Password"
             secureTextEntry={hidePassword}
-            icon={
-              <TouchableWithoutFeedback onPress={onToggleHidePassword}>
-                <Icon
-                  name={hidePassword ? 'eye' : 'eye-slash'}
-                  color={colors.text}
-                  size={20}
-                  enableRTL
-                />
-              </TouchableWithoutFeedback>
+            mb="10"
+            testID="input-password"
+            InputRightElement={
+              <IconButton
+                testID="hide-password"
+                onPress={onToggleHidePassword}
+                icon={
+                  hidePassword ? (
+                    <WarningIcon
+                      name={'warning-1'}
+                      color={colors.black}
+                      size={6}
+                      testID="icon-hide"
+                    />
+                  ) : (
+                    <WarningTwoIcon
+                      name={'warning-2'}
+                      color={colors.black}
+                      size={6}
+                      testID="icon-show"
+                    />
+                  )
+                }
+              />
             }
-            style={styles.textInput}
           />
-          <Button outline style={{ width: '100%', marginTop: 20 }} onPress={goToHome}>
+          <Button onPress={goToHome} variant={'solid'} size={'lg'} testID="btn-submit">
             Login
           </Button>
-        </View>
+          <View flexDirection={'row'} mt={30}>
+            <Text fontSize={'md'} color={'blue.500'} mr={1}>
+              Don't have account?
+            </Text>
+            <Text fontSize={'md'} color={'blue.500'} onPress={goToSignUp} testID="btn-signup">
+              Register
+            </Text>
+          </View>
+        </Center>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </Box>
   );
-});
+}

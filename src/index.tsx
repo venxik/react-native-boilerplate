@@ -1,28 +1,72 @@
-import React from 'react';
-import { PersistGate } from 'redux-persist/integration/react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import notifee from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+import { NativeBaseProvider } from 'native-base';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { QueryClientProvider } from 'react-query';
-import { LogBox } from 'react-native';
-import { persistor, store, queryClient } from './redux';
-import Navigator from './navigation';
-import { useLayout } from './hooks';
-import 'react-native-gesture-handler';
+import { PersistGate } from 'redux-persist/integration/react';
+import { useLayout, useNotification } from './hooks';
+import Router from './navigation';
+import { persistor, store } from './redux';
+import { themes } from './theme';
+import { fetchConfig } from './utils';
+import { utils } from '@react-native-firebase/app';
+import analytics from '@react-native-firebase/analytics';
 
 useLayout().setupLayoutAnimation();
-LogBox.ignoreAllLogs();
+fetchConfig();
 
 function App() {
+  const { displayNotification } = useNotification();
+
+  async function bootstrap() {
+    if (utils().isRunningInTestLab) {
+      await analytics().setAnalyticsCollectionEnabled(false);
+    }
+  }
+
+  async function requestUserPermission() {
+    await messaging().requestPermission();
+    // const authStatus = await messaging().requestPermission();
+    // const enabled =
+    //   authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    //   authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    // if (enabled) {
+    //   // console.log('Authorization status:', authStatus);
+    // } else {
+    //   // console.log('User declined permissions');
+    // }
+  }
+
+  useEffect(() => {
+    requestUserPermission();
+    bootstrap();
+
+    // notifee.onBackgroundEvent(async ({ type }) => {
+    notifee.onBackgroundEvent(async () => {
+      // if (type === EventType.PRESS) {
+      // console.log('User pressed the notification.', detail.pressAction.id);
+      // }
+    });
+
+    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+      // Get message image
+      // const avatar = remoteMessage.notification.android.imageUrl;
+
+      // Show an alert to the user
+      displayNotification(remoteMessage.notification.title, remoteMessage.notification.body);
+    });
+
+    // return subscribe;
+  }, []);
   return (
-    <QueryClientProvider client={queryClient}>
+    <NativeBaseProvider theme={themes}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <SafeAreaProvider>
-            <Navigator />
-          </SafeAreaProvider>
+          <Router />
         </PersistGate>
       </Provider>
-    </QueryClientProvider>
+    </NativeBaseProvider>
   );
 }
 export default App;

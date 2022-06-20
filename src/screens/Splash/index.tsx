@@ -10,6 +10,7 @@ export default function Splash(): JSX.Element {
   return (
     <SafeAreaView style={styles.imageRotate}>
       <Animated.Image
+        testID={'splash-screen'}
         source={Logo}
         style={{ width: 300, height: 300, transform: [{ rotate: rotateData }] }}
       />

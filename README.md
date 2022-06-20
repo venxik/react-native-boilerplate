@@ -1,287 +1,543 @@
-<br/>
+# :pushpin: React Native Boilerplate
 
-A well-structured React Native Boilerplate with Typescript, Redux, Jest support and everything you'll ever need to deploy rock solid apps.
+React Native boilerplate repository version 0.0.1
 
-<br/>
+## ⚡️Getting Started
 
-## About
+Make sure you already React Native environment running in you machine. Please refer to the official [docs](https://reactnative.dev/docs/getting-started)
 
-React Native lets you build mobile apps using JavaScript. It uses the same design as React, letting you compose a rich mobile UI from declarative components.
+### :hammer_and_pick: Configurations
 
-It offers faster mobile development, and more efficient code sharing across iOS, Android, and the Web, without sacrificing the end user’s experience or application quality.
+1. Change package name, bundle id (iOS) or application id (android).
+   Reference:
+   - [Change package name](https://dev.to/karanpratapsingh/quick-guide-for-updating-package-name-in-react-native-3ei3)
+2. Create your own keystore and key.properties.
+   Reference:
+   - [App Signing (keystore)](https://developer.android.com/studio/publish/app-signing)
+   - [Create keystore using Keytool](https://reactnative.dev/docs/signed-apk-android)
+3. Setup your firebase project for firebase analytics, crashlytics, and messaging.
+   Reference:
+   - [Understand Firebase Project](https://firebase.google.com/docs/projects/learn-more)
+   - [Firebase for React Native](https://rnfirebase.io/)
+4. Setup your android and ios project to integrate with Fastlane and Firebase
+   Reference:
+   - [Fastlane Official Documentation](https://docs.fastlane.tools/)
+   - [Firebase Official Documentation for Android App](https://firebase.google.com/docs/app-distribution/android/distribute-fastlane)
+   - [Firebase Official Documentation for iOS App](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane)
+   - [Simple Fastlane and Firebase integration](https://github.com/JesuHrz/distribution-with-firebase-and-fastlane)
+5. Configure your env with [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv)
+6. Using [Atomic Design Pattern](https://paulonteri.com/thoughts/atomic-design-react)
+7. Using [Redux](https://redux.js.org/), [Redux Toolkit](https://redux-toolkit.js.org/) and [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for services
+8. Using [Native Base](https://nativebase.io/) UI material to design this boilerplate
 
-This boilerplate is useful to kick-start your project, as it provides latest powerfull tools which specified at the below.
+### 🚚 How to run, and build Apk
 
-<br/>
+NOTES: This boilerplate uses `yarn` as main command, not `npm`.
 
-## Features
+Make sure to open android simulator or connect android devices.
+To make sure android emulator have the same port with metro bundler, run this command first
 
-This boilerplate includes the latest powerfull tools.
-
-- **Typescript** - Superset of JavaScript which primarily provides optional static typing, classes and interfaces. path support(allias)
-- **React Navigation** - Start quickly with built-in navigators that deliver a seamless out-of-the-box experience.
-- **React Query** - Performant and powerful data synchronization for React. Fetch, cache and update data in your React and React Native applications all without touching any "global state".
-- **Redux** - State management
-- **Redux Toolkit** - The official, opinionated, batteries-included toolset for efficient Redux development
-- **Redux Persist** - Persist and rehydrate a redux store.
-- **Axios** - Axios is a promise-based HTTP Client for node.js and the browser. It is isomorphic (= it can run in the browser and nodejs with the same codebase).
-- **Babel** - The compiler for next generation JavaScript. Module(alias) support
-- **TSLint** - Contains TypeScript-specific options for our project.
-- **CodePush** - CodePush is a cloud service that enables Cordova and React Native developers to deploy mobile app updates directly to their users' devices.
-- **React Native SVG** - React Native SVG provides SVG support to React Native on iOS and Android.
-- **React Native Fast Image** - FastImage, performant React Native image component.
-- **React-i18next** - Integrates I18n with React Native. Uses the user preferred locale as default.
-- **Jest support** - Complete and ready to set-up JavaScript testing solution. Works out of the box for any React project.
-- **Husky** - Modern native git hooks made easy. You can use it to lint your commit messages, run tests, lint code, etc... when you commit or push. Husky supports all Git hooks.
-- **Eslint & Prettier** - Find and fix problems in your JavaScript code. Make your code clean.
-
-<br/>
-
-_Here are a few highlights to look out for in this boilerplate_
-
-<dl>
-  
-  <dd>The boilerplate includes tsconfig.json which contains a list of your input files as well as all your compilation settings.<dd>
-
-> One of TypeScript’s core principles is that type-checking focuses on the shape that values have. This is sometimes called “duck typing” or “structural subtyping”. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
-
-  <dd>CodePush <dd>
-
-> The CodePush plugin helps get product improvements in front of your end users instantly, by keeping your JavaScript and images synchronized with updates you release to the CodePush server. This way, your app gets the benefits of an offline mobile experience, as well as the "web-like" agility of side-loading updates as soon as they are available
-
-</dl>
-
-<br/>
-
-## Getting Started
-
-1. Clone the repository and install the dependencies:
-
-```sh
-git clone https://github.com/kholiqcode/react-native-boilerplate
+```shell
+yarn android:local
 ```
 
-2. To create a new app, go to the choosen app directory on the CLI then run one of the following methods:
+Example how to run android with development env
 
-**npm**
-
-```sh
-yarn install
+```shell
+yarn android:local
+yarn run:android-debug
 ```
 
-3. Once the installation is done, you can run the following command:
+Example how to run android with staging env
 
-**ios**
-
-```
-yarn ios
-```
-
-**android**
-
-```
-yarn android
+```shell
+//To make sure devices have the same port with metro bundler
+yarn android:local
+yarn run:android-staging
 ```
 
- <br/>
+Example how to run android with release env
 
-### Predefined commands on package.json
-
-Cache clear and restart react native bundler
-
-```
-yarn clear
+```shell
+//To make sure devices have the same port with metro bundler
+yarn android:local
+yarn run:android-prod
 ```
 
-Bundler analyzer
+If there is any error when running these commands, try to run with Android Studio
 
-```
-yarn start
-```
+Example how to build android with prod env release variant
 
-Run the tests
-
-```
-yarn test
+```shell
+yarn release:android
 ```
 
-Run eslint
+If there is any error when running this command, try to build with Android Studio
 
-```
-yarn lint
-```
+Example how to run ios with development env
 
-Fix eslint
-
-```
-yarn lint:fix
+```shell
+yarn run:ios-debug
 ```
 
- <br/>
+Example how to run ios with staging env
 
-**_At this point, your project layout should look like this:_**
+```shell
+yarn run:ios-staging
+```
 
- <br/>
+Example how to run ios with release env
+
+```shell
+yarn run:ios-prod
+```
+
+If there is any error when running these commands, try to run with Xcode
+
+### ⚙️ Supported Flavor
+
+1. development
+2. production
+3. staging
+
+In android there are 3 product flavor: `dev`, `prod`, `staging`.
+In ios there are 3 scheme: `Boilerplate`, `Boilerplate Prod`, `Boilerplate Staging`.
+All of them are already correspond with the env.
+
+### :test_tube: How to Test Coverage
+
+Run `yarn test:cov` and it will generate coverage report on .coverage folder
+
+### :new: Versioning
+
+Using Semantic Versioning 2.0.0
+
+Major.Minor.Patch
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+1. MAJOR version when you make incompatible API changes,
+2. MINOR version when you add functionality in a backwards compatible manner, and
+3. PATCH version when you make backwards compatible bug fixes.
+   Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+
+### :capital_abcd: Naming Convention
+
+camelCase for file and folder.
+
+### :beach_umbrella: Theme
+
+Using [Native-Base Theme](https://docs.nativebase.io/customizing-theme), we can create and/or modify existing variant of the component. It also supports [dark mode](https://docs.nativebase.io/dark-mode). Here's example of adding dark mode style and add new variant to Button component.
+
+```javascript
+const Button = {
+  // You can insert dark theme mode here
+  // mode(first, second) -> first is for light theme, second is for dark theme
+  baseStyle: (props: any) => {
+    return {
+      color: themeTools.mode('red.300', 'blue.300')(props),
+    };
+  },
+  // You can also define or modify existing variant of component here
+  variants: {
+    solid: (props: any) => {
+      return {
+        _text: {
+          fontFamily: props.fontFamily,
+          fontWeight: props.fontWeight,
+        },
+        ...props,
+      };
+    },
+    outlineLime: (props: any) => {
+      return {
+        borderWidth: '1',
+        borderColor: 'current.100',
+        _text: {
+          color: 'current.100',
+          fontWeight: props.fontWeight,
+          fontFamily: props.fontFamily,
+        },
+        ...props,
+      };
+    },
+  },
+};
+// You need to insert this object to the native-base's extendTheme function
+```
+
+### :evergreen_tree: At this point, your project layout should look like this:
 
 ```
-.
-├── App.tsx
-├── Gemfile
-├── LICENSE
-├── README.md
-├── __tests__
-│   └── App-test.tsx
-├── app.json
-├── babel.config.js
-├── index.d.ts
-├── index.js
-├── metro.config.js
-├── package-lock.json
-├── package.json
-├── react-native.config.ts
-├── src
-│   ├── assets
-│   │   ├── fonts
-│   │   │   ├── OpenSans
-│   │   │   └── Poppins
-│   │   ├── images
-│   │   │   ├── common
-│   │   │   │   ├── index.ts
-│   │   │   │   ├── logo.png
-│   │   │   │   └── logo.svg
-│   │   │   ├── dummy
-│   │   │   └── index.ts
-│   │   └── index.ts
-│   ├── components
-│   │   ├── atoms
-│   │   │   ├── Button
-│   │   │   │   ├── index.tsx
-│   │   │   │   ├── styles.ts
-│   │   │   │   └── types.d.ts
-│   │   │   ├── Icon
-│   │   │   │   ├── index.tsx
-│   │   │   │   ├── styles.ts
-│   │   │   │   └── types.d.ts
-│   │   │   ├── Image
-│   │   │   │   ├── index.tsx
-│   │   │   │   └── type.d.ts
-│   │   │   ├── Text
-│   │   │   │   ├── index.tsx
-│   │   │   │   └── types.d.ts
-│   │   │   ├── TextInput
-│   │   │   │   ├── index.tsx
-│   │   │   │   ├── styles.ts
-│   │   │   │   └── types.d.ts
-│   │   │   └── index.ts
-│   │   ├── containers
-│   │   │   └── index.ts
-│   │   ├── index.ts
-│   │   ├── molecules
-│   │   │   └── index.ts
-│   │   └── organisms
-│   │       └── index.ts
-│   ├── config
-│   │   ├── axios.ts
-│   │   ├── constant.ts
-│   │   ├── index.ts
-│   │   ├── setting.ts
-│   │   └── url.ts
-│   ├── hooks
-│   │   ├── index.ts
-│   │   ├── useLayout.ts
-│   │   ├── useOnlineManager.ts
-│   │   ├── useReactQuery.ts
-│   │   ├── useRefetchOnFocus.ts
-│   │   └── useRequest.ts
-│   ├── index.tsx
-│   ├── lang
-│   │   ├── en.json
-│   │   └── id.json
-│   ├── navigation
-│   │   ├── components
-│   │   │   ├── Drawer
-│   │   │   │   └── index.ts
-│   │   │   ├── Tab
-│   │   │   │   ├── TabIcon.tsx
-│   │   │   │   ├── TabNavigator.tsx
-│   │   │   │   ├── index.ts
-│   │   │   │   ├── styles.ts
-│   │   │   │   └── types.d.ts
-│   │   │   └── index.ts
-│   │   ├── config
-│   │   │   ├── app.tsx
-│   │   │   ├── index.ts
-│   │   │   ├── modal.ts
-│   │   │   ├── share.ts
-│   │   │   └── types.d.ts
-│   │   ├── index.tsx
-│   │   └── styles.ts
-│   ├── redux
-│   │   ├── index.ts
-│   │   ├── rootReducer.ts
-│   │   └── slices
-│   │       ├── application
-│   │       │   ├── index.ts
-│   │       │   └── types.d.ts
-│   │       ├── index.ts
-│   │       └── user
-│   │           ├── index.ts
-│   │           └── types.d.ts
-│   ├── screens
-│   │   ├── Home
-│   │   │   ├── hook.ts
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.ts
-│   │   │   └── types.d.ts
-│   │   ├── Modal
-│   │   │   ├── ModalSelectFont
-│   │   │   │   ├── hook.ts
-│   │   │   │   ├── index.tsx
-│   │   │   │   ├── styles.ts
-│   │   │   │   └── types.d.ts
-│   │   │   └── index.ts
-│   │   ├── Setting
-│   │   │   ├── hook.ts
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.ts
-│   │   │   └── types.d.ts
-│   │   ├── SignIn
-│   │   │   ├── hook.ts
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.ts
-│   │   │   └── types.d.ts
-│   │   ├── Splash
-│   │   │   ├── hook.ts
-│   │   │   ├── index.tsx
-│   │   │   ├── styles.ts
-│   │   │   └── types.d.ts
-│   │   └── index.tsx
-│   ├── services
-│   │   ├── index.ts
-│   │   └── user
-│   │       ├── index.ts
-│   │       └── type.d.ts
-│   └── theme
-│       ├── animation
-│       │   └── index.ts
-│       ├── base
-│       │   └── index.ts
-│       ├── color
-│       │   ├── index.ts
-│       │   └── types.d.ts
-│       ├── font
-│       │   ├── index.ts
-│       │   └── types.d.ts
-│       ├── index.ts
-│       ├── mixin
-│       │   └── index.ts
-│       ├── pallete
-│       │   ├── index.ts
-│       │   └── types.d.ts
-│       └── typography
-│           ├── index.ts
-│           └── types.d.ts
-├── tsconfig.json
-└── yarn.lock
+react-native-boilerplate
+├─ .buckconfig
+├─ .bundle
+│  └─ config
+├─ .commitlintrc.json
+├─ .eslintignore
+├─ .eslintrc.js
+├─ .github
+│  └─ workflows
+│     └─ build.yml
+├─ .gitignore
+├─ .husky
+│  ├─ _
+│  │  ├─ .gitignore
+│  │  └─ husky.sh
+│  ├─ commit-msg
+│  └─ pre-commit
+├─ .prettierignore
+├─ .prettierrc.js
+├─ .ruby-version
+├─ .vscode
+│  ├─ .react
+│  └─ settings.json
+├─ .watchmanconfig
+├─ CHANGELOG.md
+├─ Gemfile
+├─ LICENSE
+├─ __mocks__
+│  ├─ @react-native-async-storage
+│  │  └─ async-storage.ts
+│  ├─ helpers.tsx
+│  ├─ react-i18next
+│  │  └─ index.js
+│  ├─ timeTravel.ts
+│  └─ wrapper.tsx
+├─ android
+│  ├─ Gemfile
+│  ├─ Gemfile.lock
+│  ├─ fastlane
+│  │  ├─ .env
+│  │  ├─ Appfile
+│  │  ├─ Fastfile
+│  │  ├─ Pluginfile
+│  │  ├─ README.md
+│  │  └─ report.xml
+│  ├─ gradle
+│  │  └─ wrapper
+│  │     ├─ gradle-wrapper.jar
+│  │     └─ gradle-wrapper.properties
+│  ├─ gradle.properties
+│  ├─ gradlew
+│  └─ gradlew.bat
+├─ app.json
+├─ babel.config.json
+├─ index.js
+├─ ios
+│  ├─ Config.xcconfig
+│  ├─ Gemfile
+│  ├─ Gemfile.lock
+│  ├─ Podfile
+│  ├─ Podfile.lock
+│  └─ fastlane
+│     ├─ Appfile
+│     ├─ Fastfile
+│     └─ Pluginfile
+├─ jest.config.js
+├─ jest.setup.js
+├─ metro.config.js
+├─ package.json
+├─ react-native.config.js
+├─ sonar-project.properties
+├─ src
+│  ├─ __tests__
+│  │  └─ App.test.tsx
+│  ├─ assets
+│  │  ├─ fonts
+│  │  │  ├─ OpenSans
+│  │  │  │  ├─ OpenSans-Bold.ttf
+│  │  │  │  ├─ OpenSans-BoldItalic.ttf
+│  │  │  │  ├─ OpenSans-ExtraBold.ttf
+│  │  │  │  ├─ OpenSans-ExtraBoldItalic.ttf
+│  │  │  │  ├─ OpenSans-Italic.ttf
+│  │  │  │  ├─ OpenSans-Light.ttf
+│  │  │  │  ├─ OpenSans-LightItalic.ttf
+│  │  │  │  ├─ OpenSans-Medium.ttf
+│  │  │  │  ├─ OpenSans-MediumItalic.ttf
+│  │  │  │  ├─ OpenSans-Regular.ttf
+│  │  │  │  ├─ OpenSans-SemiBold.ttf
+│  │  │  │  └─ OpenSans-SemiBoldItalic.ttf
+│  │  │  └─ Poppins
+│  │  │     ├─ OFL.txt
+│  │  │     ├─ Poppins-Black.ttf
+│  │  │     ├─ Poppins-BlackItalic.ttf
+│  │  │     ├─ Poppins-Bold.ttf
+│  │  │     ├─ Poppins-BoldItalic.ttf
+│  │  │     ├─ Poppins-ExtraBold.ttf
+│  │  │     ├─ Poppins-ExtraBoldItalic.ttf
+│  │  │     ├─ Poppins-ExtraLight.ttf
+│  │  │     ├─ Poppins-ExtraLightItalic.ttf
+│  │  │     ├─ Poppins-Italic.ttf
+│  │  │     ├─ Poppins-Light.ttf
+│  │  │     ├─ Poppins-LightItalic.ttf
+│  │  │     ├─ Poppins-Medium.ttf
+│  │  │     ├─ Poppins-MediumItalic.ttf
+│  │  │     ├─ Poppins-Regular.ttf
+│  │  │     ├─ Poppins-SemiBold.ttf
+│  │  │     ├─ Poppins-SemiBoldItalic.ttf
+│  │  │     ├─ Poppins-Thin.ttf
+│  │  │     └─ Poppins-ThinItalic.ttf
+│  │  ├─ images
+│  │  │  ├─ common
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ logo.png
+│  │  │  │  └─ logo.svg
+│  │  │  └─ index.ts
+│  │  └─ index.ts
+│  ├─ components
+│  │  ├─ atoms
+│  │  │  └─ index.ts
+│  │  ├─ containers
+│  │  │  └─ index.ts
+│  │  ├─ index.ts
+│  │  ├─ molecules
+│  │  │  ├─ ProductsCard
+│  │  │  │  └─ index.tsx
+│  │  │  ├─ UsersCard
+│  │  │  │  └─ index.tsx
+│  │  │  └─ index.ts
+│  │  └─ organisms
+│  │     ├─ FOProductsSection
+│  │     │  └─ index.tsx
+│  │     ├─ FOUserSection
+│  │     │  └─ index.tsx
+│  │     └─ index.ts
+│  ├─ config
+│  │  ├─ config.d.ts
+│  │  ├─ constant.ts
+│  │  ├─ index.ts
+│  │  ├─ setting.ts
+│  │  └─ url.ts
+│  ├─ global
+│  │  ├─ env.d.ts
+│  │  ├─ index.d.ts
+│  │  └─ navigation.d.ts
+│  ├─ hooks
+│  │  ├─ __tests__
+│  │  │  └─ useLayout.test.ts
+│  │  ├─ index.ts
+│  │  ├─ useDebounce.ts
+│  │  └─ useLayout.ts
+│  ├─ index.tsx
+│  ├─ lang
+│  │  ├─ en.json
+│  │  └─ id.json
+│  ├─ navigation
+│  │  ├─ __tests__
+│  │  │  └─ navigation.test.tsx
+│  │  ├─ index.tsx
+│  │  └─ navigationService.ts
+│  ├─ redux
+│  │  ├─ __tests__
+│  │  │  └─ application.test.ts
+│  │  ├─ application
+│  │  │  ├─ index.ts
+│  │  │  └─ types.d.ts
+│  │  ├─ index.ts
+│  │  └─ rootReducer.ts
+│  ├─ screens
+│  │  ├─ Home
+│  │  │  ├─ hook.ts
+│  │  │  ├─ index.tsx
+│  │  │  ├─ styles.ts
+│  │  │  └─ types.d.ts
+│  │  ├─ Setting
+│  │  │  ├─ hook.ts
+│  │  │  ├─ index.tsx
+│  │  │  ├─ styles.ts
+│  │  │  └─ types.d.ts
+│  │  ├─ SignIn
+│  │  │  ├─ hook.ts
+│  │  │  ├─ index.tsx
+│  │  │  ├─ styles.ts
+│  │  │  └─ types.d.ts
+│  │  ├─ Splash
+│  │  │  ├─ hook.ts
+│  │  │  ├─ index.tsx
+│  │  │  ├─ styles.ts
+│  │  │  └─ types.d.ts
+│  │  ├─ __tests__
+│  │  │  ├─ Setting.test.tsx
+│  │  │  ├─ SignIn.test.tsx
+│  │  │  └─ Splash.test.tsx
+│  │  └─ index.tsx
+│  ├─ services
+│  │  ├─ baseQuery.ts
+│  │  ├─ index.ts
+│  │  ├─ products
+│  │  │  └─ index.ts
+│  │  └─ user
+│  │     └─ index.ts
+│  ├─ theme
+│  │  ├─ __tests__
+│  │  │  ├─ components.test.ts
+│  │  │  └─ fonts.test.ts
+│  │  ├─ baseStyle.ts
+│  │  ├─ colors.ts
+│  │  ├─ components.ts
+│  │  ├─ fonts.ts
+│  │  └─ index.ts
+│  └─ utils
+│     ├─ __tests__
+│     │  ├─ generic.test.ts
+│     │  └─ normalize.test.ts
+│     ├─ generic.ts
+│     └─ normalize.ts
+├─ tsconfig.json
+└─ yarn.lock
 
+```
+
+A brief description of the layout:
+
+- `.github` has one github workflows directory.
+- `android` is android configuration directory.
+- `ios` is ios configuration directory.
+- `.gitignore` varies per project, but most of it uses create react-native app base .gitignore file.
+
+### RTK Query example fetch data
+
+You can see the example in `src/services/products`. This is the only basic api to get data from API, you can learn more from the [official docs](https://redux-toolkit.js.org/rtk-query/overview).
+
+```javascript
+import { createApi } from '@reduxjs/toolkit/dist/query/react';
+import { functionsBaseQuery } from '../baseQuery';
+
+export interface IProductsDetail {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+}
+
+export interface IProducts {
+  products: IProductsDetail[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+const reducerPath = 'productsAPI';
+
+export const productsAPI = createApi({
+  reducerPath: reducerPath,
+  baseQuery: functionsBaseQuery(),
+  tagTypes: ['Products'], //We provide tags that are available for this api
+  keepUnusedDataFor: process.env.NODE_ENV !== 'test' ? 60 : 0,
+  endpoints: (builder) => ({
+    getProduct: builder.query<IProducts, string>({ //Rule of thumb, mutation is used for GET method
+      query: (query) => `/products/search?q=${query}`,
+      providesTags: ['Products'], // We provide the corresponding tags
+    }),
+    refetchProducts: builder.mutation<null, void>({ //Rule of thumb, mutation is used for POST, PATCH, DELETE method
+      // The query is not relevant here, so a `null` returning `queryFn` is used
+      queryFn: () => ({ data: null }),
+      // This mutation takes advantage of tag invalidation behaviour to trigger
+      // any queries that provide the 'Post' or 'User' tags to re-fetch if the queries
+      // are currently subscribed to the cached data.
+      // Meaning if we call this, it will call getProduct to update the cached data
+      invalidatesTags: ['Products'],
+    }),
+  }),
+});
+
+export const { useGetProductQuery } = productsAPI;
+export const productsQueryReducer = { [reducerPath]: productsAPI.reducer };
+```
+
+### :dizzy: Upload "beta" version to Firebase with Fastlane
+
+**This is only for android**. To upload a "beta" version to firebase, you can run command
+
+```shell
+  beta:android
+```
+
+### :smiling_imp: Unit Testing
+
+Unit testing uses jest. You can navigate to [here](./src/screens/__tests__/) to see some unit test examples
+
+### :smiling_imp: Detox end-to-end testing
+
+This boilerplate is already supported with [Detox](https://wix.github.io/Detox/docs/introduction/getting-started/). You can navigate [here](./e2e/tests/) to see some examples. All available configs are on `.detoxrc.json` file.
+You need to change your simulator and emulator name on the `.detoxrc.json` configuration first to be same with the one on your machine so it can work on your machine.
+
+To build and test application run on ios
+
+```shell
+build:e2e-ios-dev-debug
+test:e2e-ios-dev-debug
+```
+
+To build and test application run on android
+
+```shell
+build:e2e-android-dev-debug
+test:e2e-android-dev-debug
+```
+
+### Jest example to mock service response
+
+You can see the example in `src/components/organisms/__tests__` based on [this article](https://medium.com/@johnmcdowell0801/testing-rtk-query-with-jest-cdfa5aaf3dc1).
+
+```javascript
+import React from 'react';
+import FOProductsSection from '../FOProductsSection';
+import { AllTheProviders, render } from '../../../__mocks__/wrapper';
+import { renderHook } from '@testing-library/react-hooks/native';
+import { useGetProductQuery } from '../../../services';
+import { products } from '../../../__mocks__/testData';
+
+const updateTimeout = 5000;
+
+beforeEach(() => {
+  fetchMock.resetMocks(); //reset fetchmock before each test case runs
+});
+
+describe('FOProductsSection screen', () => {
+  it('handles good response', async () => {
+    fetchMock.mockResponse(JSON.stringify({ data: products })); // we mock the wanted response here
+    const { result, waitForNextUpdate } = renderHook(() => useGetProductQuery(undefined), {
+      wrapper: AllTheProviders,
+    });
+    const { getByText, container } = render(<FOProductsSection query={'Apple'} />);
+
+    const initialResponse = result.current;
+    expect(initialResponse.data).toBeUndefined();
+    expect(initialResponse.isLoading).toBe(true);
+    expect(getByText('Loading')).toBeDefined();
+    await waitForNextUpdate({ timeout: updateTimeout });
+    expect(container).toBeDefined();
+
+    const nextResponse = result.current;
+    expect(nextResponse.data).not.toBeUndefined();
+    expect(nextResponse.isLoading).toBe(false);
+    expect(nextResponse.isSuccess).toBe(true);
+  });
+
+  it('handles error response', async () => {
+    fetchMock.mockReject(new Error('Internal Server Error')); //we mock the error response here
+    const { result, waitForNextUpdate } = renderHook(() => useGetProductQuery(undefined), {
+      wrapper: AllTheProviders,
+    });
+    const initialResponse = result.current;
+    expect(initialResponse.data).toBeUndefined();
+    expect(initialResponse.isLoading).toBe(true);
+
+    await waitForNextUpdate({ timeout: updateTimeout });
+
+    const nextResponse = result.current;
+    expect(nextResponse.data).toBeUndefined();
+    expect(nextResponse.isLoading).toBe(false);
+    expect(nextResponse.isError).toBe(true);
+  });
+});
 ```
