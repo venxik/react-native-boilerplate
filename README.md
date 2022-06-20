@@ -488,7 +488,7 @@ build:e2e-android-dev-debug
 test:e2e-android-dev-debug
 ```
 
-### :smiling_imp: Jest example to mock service response using jest-fetch-mock
+### :smiling_imp: Jest example to mock service response
 
 You can see the example in `src/services/__tests__/products.test.ts` based on [this article](https://medium.com/@johnmcdowell0801/testing-rtk-query-with-jest-cdfa5aaf3dc1).
 
