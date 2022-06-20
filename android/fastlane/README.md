@@ -23,13 +23,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Runs all the tests
 
-### android deploy
+### android increment_version
 
 ```sh
-[bundle exec] fastlane android deploy
+[bundle exec] fastlane android increment_version
 ```
 
-Deploy a new version to the Google Play
+Increment version based on latest version on the firebase lane
 
 ### android beta
 
