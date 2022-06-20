@@ -2,7 +2,7 @@ name: Distribute to firebase
 
 on:
   push:
-    branches: [develop, main]
+    branches: [develop, main, hotfix/fastlane-github-action]
 
 jobs:
   distribute:
