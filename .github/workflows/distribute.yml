@@ -11,6 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      # - name: Install dependencies
+      #   run: yarn install
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7.0'
@@ -21,8 +29,8 @@ jobs:
       #     yarn global add firebase-tools
       #     echo "::add-path::$(yarn global bin)"
 
-      - name: setup fastlane
-        run: bundle install
+    - name: Install Fastlane
+      run: cd android && bundle install && cd..
 
       # - name: Configure Keystore
       #   run: |
