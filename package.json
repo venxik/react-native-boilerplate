@@ -11,7 +11,7 @@
     "run:ios-staging": "npx react-native run-ios --scheme \"Boilerplate Staging\"",
     "run:ios-prod": "npx react-native run-ios --scheme \"Boilerplate Prod\"",
     "build:android-prod": "cd android && ./gradlew assembleProdRelease",
-    "beta:android": "cd android && fastlane beta",
+    "android:beta": "cd android && fastlane beta",
     "android:local": "adb reverse tcp:8081 tcp:8081",
     "start": "react-native start --reset-cache",
     "release": "standard-version",
