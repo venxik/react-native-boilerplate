@@ -23,10 +23,10 @@ jobs:
           bundler-cache: true
 
       - name: Install Fastlane
-        run: cd android && bundle install && cd..
+        run: cd android && bundle install
 
       - name: Install packages
-        run: yarn install
+        run: cd.. && yarn install
 
         ## configure cash for gradle : will help to reduce build time
 
