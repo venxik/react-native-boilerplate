@@ -39,7 +39,8 @@ platform :android do
   desc "Increment version based on latest version on the firebase lane"
   lane :increment_version do
     latest_release = firebase_app_distribution_get_latest_release(
-      app: ENV['FIREBASE_APP_ID']
+      app: ENV['FIREBASE_APP_ID'],
+      service_credentials_file: "firebase_credentials.json"
     )
     increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
   end

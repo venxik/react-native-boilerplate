@@ -66,6 +66,6 @@ jobs:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        run: echo $FIREBASE_APP_ID && yarn android:beta
+        run: yarn android:beta
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
