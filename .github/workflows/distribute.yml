@@ -16,21 +16,33 @@ jobs:
         with:
           node-version: '18'
 
-      # - name: Install dependencies
-      #   run: yarn install
-
-      - uses: ruby/setup-ruby@v1
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7.0'
           bundler-cache: true
 
-      # - name: install firebase tool
-      #   run: |
-      #     yarn global add firebase-tools
-      #     echo "::add-path::$(yarn global bin)"
+      - name: Install Fastlane
+        run: cd android && bundle install && cd..
 
-    - name: Install Fastlane
-      run: cd android && bundle install && cd..
+      - name: Install packages
+        run: yarn install
+
+        ## configure cash for gradle : will help to reduce build time
+
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
 
       # - name: Configure Keystore
       #   run: |
@@ -48,12 +60,12 @@ jobs:
 
       - name: Create Firebase Service Credentials file
         run: |
-          echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
-          base64 -d -i firebase_credentials.json.b64 > firebase_credentials.json
+          cd android && echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
+          base64 -d -i firebase_credentials.json.b64 > firebase_credentials.json && cd ..
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        run: bundle exec fastlane distribute
+        run: yarn android:beta
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
