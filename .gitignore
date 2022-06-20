@@ -28,7 +28,7 @@ build/
 .gradle
 local.properties
 google-services.json
-android/firebase_credentials.json
+/android/firebase_credentials.json
 android/app/google-services.json
 GoogleService-Info.plist
 *.iml
