@@ -36,6 +36,16 @@ platform :android do
   #   upload_to_play_store
   # end
 
+  desc "Increment version based on latest version on the firebase lane"
+  lane :increment_version do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: ENV['FIREBASE_APP_ID'],
+      service_credentials_file: "firebase_credentials.json"
+    )
+    increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
+  end
+  
+
   desc "Building your App in version beta"
   lane :beta do |options|
     puts "+---------------------------------+".bold.blue
@@ -46,17 +56,22 @@ platform :android do
     #   gradle_file_path: "app/build.gradle",
     # )
 
+    increment_version
+
     # tests must pass
-    sh "yarn test" ## uncomment this line to check test before build android
+    # sh "yarn test" ## uncomment this line to check test before build android
 
     gradle(
-      task: "clean assembleStagingRelease"
+      task: "clean assembleProdRelease"
     )
     # using ENV file, if not using ENV file we can define directly in here
     firebase_app_distribution(
-      app: ENV['APP_ID'],
-      groups: ENV["GROUPS"] || options[:groups],
-      release_notes: options[:notes] || "",
+      service_credentials_file: "firebase_credentials.json",
+      app: ENV['FIREBASE_APP_ID'],
+      # groups: ENV["GROUPS"] || options[:groups],
+      # release_notes: options[:notes] || "",
+      release_notes_file: "FirebaseAppDistributionConfig/release_notes.txt",
+      groups_file: "FirebaseAppDistributionConfig/groups.txt",
     )
   end
 end

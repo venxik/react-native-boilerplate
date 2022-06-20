@@ -20,6 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+GoogleService-Info.plist
 
 # Android/IntelliJ
 #
@@ -28,8 +29,10 @@ build/
 .gradle
 local.properties
 google-services.json
+firebase_credentials.json
 *.iml
 *.hprof
+keystore.properties
 
 # node.js
 #
@@ -68,6 +71,7 @@ buck-out/
 # Config Environment
 .env.development
 .env.production
+.env.staging
 
 # react-native-config codegen
 ios/tmp.xcconfig
