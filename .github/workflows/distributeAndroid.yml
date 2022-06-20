@@ -3,7 +3,7 @@ name: Distribute Android to Firebase
 on:
   # push:
   #   branches: [develop, main, hotfix/fastlane-github-action]
-  workflow_disptach:
+  workflow_dispatch:
 
 jobs:
   distribute:
