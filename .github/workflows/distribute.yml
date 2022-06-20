@@ -16,6 +16,13 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -66,6 +73,6 @@ jobs:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        run: yarn android:beta
+        run: cd android && bundle exec fastlane beta
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
