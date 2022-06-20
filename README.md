@@ -34,7 +34,6 @@ Make sure you already React Native environment running in you machine. Please re
 
 NOTES: This boilerplate uses `yarn` as main command, not `npm`.
 
-Make sure to open android simulator or connect android devices.
 To make sure android emulator have the same port with metro bundler, run this command first
 
 ```shell
@@ -51,15 +50,13 @@ yarn run:android-debug
 Example how to run android with staging env
 
 ```shell
-//To make sure devices have the same port with metro bundler
 yarn android:local
 yarn run:android-staging
 ```
 
-Example how to run android with release env
+Example how to run android with production env
 
 ```shell
-//To make sure devices have the same port with metro bundler
 yarn android:local
 yarn run:android-prod
 ```
@@ -86,7 +83,7 @@ Example how to run ios with staging env
 yarn run:ios-staging
 ```
 
-Example how to run ios with release env
+Example how to run ios with production env
 
 ```shell
 yarn run:ios-prod
@@ -101,12 +98,8 @@ If there is any error when running these commands, try to run with Xcode
 3. staging
 
 In android there are 3 product flavor: `dev`, `prod`, `staging`.
-In ios there are 3 scheme: `Boilerplate`, `Boilerplate Prod`, `Boilerplate Staging`.
+In iOS there are 3 scheme: `Boilerplate`, `Boilerplate Prod`, `Boilerplate Staging`.
 All of them are already correspond with the env.
-
-### :test_tube: How to Test Coverage
-
-Run `yarn test:cov` and it will generate coverage report on .coverage folder
 
 ### :new: Versioning
 
@@ -458,12 +451,16 @@ export const productsQueryReducer = { [reducerPath]: productsAPI.reducer };
 **This is only for android**. To upload a "beta" version to firebase, you can run command
 
 ```shell
-  beta:android
+  android:beta
 ```
 
 ### :smiling_imp: Unit Testing
 
 Unit testing uses jest. You can navigate to [here](./src/screens/__tests__/) to see some unit test examples
+
+### :test_tube: How to Test Coverage
+
+Run `yarn test:cov` and it will generate coverage report on .coverage folder
 
 ### :smiling_imp: Detox end-to-end testing
 
@@ -484,7 +481,7 @@ build:e2e-android-dev-debug
 test:e2e-android-dev-debug
 ```
 
-### Jest example to mock service response
+### :smiling_imp: Jest example to mock service response
 
 You can see the example in `src/components/organisms/__tests__` based on [this article](https://medium.com/@johnmcdowell0801/testing-rtk-query-with-jest-cdfa5aaf3dc1).
 
