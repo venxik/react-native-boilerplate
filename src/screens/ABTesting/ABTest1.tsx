@@ -111,7 +111,9 @@ export default function ABTest1() {
           <Text fontSize="md" textAlign="center" fontWeight="500" mb="10">
             {experiment ? 'Baseline' : 'Variant A'}
           </Text>
-          <Button onPress={() => onFetch()}>Refresh</Button>
+          <Button testID="btn-refresh" onPress={() => onFetch()}>
+            Refresh
+          </Button>
           <Button mt={5} onPress={() => navigation.goBack()} testID="btn-back">
             Back
           </Button>
