@@ -16,8 +16,6 @@ export const useSetting = () => {
 
   //HOOKS
   useEffect(() => {
-    // const installationsForDefaultApp = firebase.installations().getId();
-    // installationsForDefaultApp.then((res) => console.log(res)).catch((err) => console.log(err));
     async function bootstrap() {
       await inAppMessaging().setMessagesDisplaySuppressed(true);
     }
