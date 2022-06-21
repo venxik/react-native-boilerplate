@@ -9,7 +9,6 @@ module.exports = {
   // transformIgnorePatterns: ['node_modules/?!(static-container)'],
   coveragePathIgnorePatterns: [
     '<rootDir>/src/theme/',
-    '<rootDir>/src/services/',
     '<rootDir>/src/config/',
     '<rootDir>/src/global/',
     '<rootDir>/src/navigation/',

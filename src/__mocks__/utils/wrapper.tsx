@@ -4,9 +4,9 @@ import { render } from '@testing-library/react-native';
 import { Container, NativeBaseProvider } from 'native-base';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
-import type { AppStore, RootState } from '../redux';
-import { setupStore } from '../redux';
-import { themes } from '../theme';
+import type { AppStore, RootState } from '../../redux';
+import { setupStore } from '../../redux';
+import { themes } from '../../theme';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store. For
