@@ -1761,9 +1761,9 @@
     set-cookie-parser "^2.4.6"
 
 "@mswjs/interceptors@^0.16.3":
-  version "0.16.5"
-  resolved "https://registry.yarnpkg.com/@mswjs/interceptors/-/interceptors-0.16.5.tgz#7001c9cc791db39681e4a9ac249ffa7f0609bf81"
-  integrity sha512-YhwcRKB42hdV2QxftYw1l0GMaXEfR7Rsg6yA4Ue+cwht5Z3IEWV8nggOjStDPlsksR8zg1plIeiTx6zHIVNiOg==
+  version "0.16.6"
+  resolved "https://registry.yarnpkg.com/@mswjs/interceptors/-/interceptors-0.16.6.tgz#c1a777ed3f69b55bbbc725b2deb827f160c0107c"
+  integrity sha512-7ax1sRx5s4ZWl0KvVhhcPOUoPbCCkVh8M8hYaqOyvoAQOiqLVzy+Z6Mh2ywPhYw4zudr5Mo/E8UT/zJBO/Wxrw==
   dependencies:
     "@open-draft/until" "^1.0.3"
     "@xmldom/xmldom" "^0.7.5"

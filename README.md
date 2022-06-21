@@ -423,12 +423,12 @@ const reducerPath = 'productsAPI';
 export const productsAPI = createApi({
   reducerPath: reducerPath,
   baseQuery: functionsBaseQuery(),
-  tagTypes: ['Products'], //We provide tags that are available for this api
+  tagTypes: ['Products'], //Provide tags that are available for this api
   keepUnusedDataFor: process.env.NODE_ENV !== 'test' ? 60 : 0,
   endpoints: (builder) => ({
-    getProduct: builder.query<IProducts, string>({ //Rule of thumb, mutation is used for GET method
+    getProduct: builder.query<IProducts, string>({ //Rule of thumb, query is used for GET method
       query: (query) => `/products/search?q=${query}`,
-      providesTags: ['Products'], // We provide the corresponding tags
+      providesTags: ['Products'], //Provide the corresponding tags from tagTypes
     }),
     refetchProducts: builder.mutation<null, void>({ //Rule of thumb, mutation is used for POST, PATCH, DELETE method
       // The query is not relevant here, so a `null` returning `queryFn` is used
@@ -481,47 +481,37 @@ build:e2e-android-dev-debug
 test:e2e-android-dev-debug
 ```
 
-### :smiling_imp: Jest example to mock service response
+### :smiling_imp: Jest example to mock service response using jest-fetch-mock
 
-You can see the example in `src/components/organisms/__tests__` based on [this article](https://medium.com/@johnmcdowell0801/testing-rtk-query-with-jest-cdfa5aaf3dc1).
+You can see the example in `src/services/__tests__/products.test.ts` based on [this article](https://medium.com/@johnmcdowell0801/testing-rtk-query-with-jest-cdfa5aaf3dc1).
 
 ```javascript
-import React from 'react';
-import FOProductsSection from '../FOProductsSection';
-import { AllTheProviders, render } from '../../../__mocks__/wrapper';
+import { AllTheProviders } from '../../__mocks__/utils/wrapper';
 import { renderHook } from '@testing-library/react-hooks/native';
-import { useGetProductQuery } from '../../../services';
-import { products } from '../../../__mocks__/testData';
+import { useGetProductQuery } from '../../services';
+import { products } from '../../__mocks__/testData';
 
 const updateTimeout = 5000;
 
-beforeEach(() => {
-  fetchMock.resetMocks(); //reset fetchmock before each test case runs
-});
-
 describe('FOProductsSection screen', () => {
   it('handles good response', async () => {
-    fetchMock.mockResponse(JSON.stringify({ data: products })); // we mock the wanted response here
+    fetchMock.mockResponse(JSON.stringify({ data: products }));
     const { result, waitForNextUpdate } = renderHook(() => useGetProductQuery(undefined), {
       wrapper: AllTheProviders,
     });
-    const { getByText, container } = render(<FOProductsSection query={'Apple'} />);
-
     const initialResponse = result.current;
     expect(initialResponse.data).toBeUndefined();
     expect(initialResponse.isLoading).toBe(true);
-    expect(getByText('Loading')).toBeDefined();
     await waitForNextUpdate({ timeout: updateTimeout });
-    expect(container).toBeDefined();
 
     const nextResponse = result.current;
-    expect(nextResponse.data).not.toBeUndefined();
+    expect(nextResponse.data).toBeDefined();
     expect(nextResponse.isLoading).toBe(false);
     expect(nextResponse.isSuccess).toBe(true);
   });
 
   it('handles error response', async () => {
-    fetchMock.mockReject(new Error('Internal Server Error')); //we mock the error response here
+    fetchMock.mockReject(new Error('Internal Server Error'));
     const { result, waitForNextUpdate } = renderHook(() => useGetProductQuery(undefined), {
       wrapper: AllTheProviders,
     });
@@ -535,6 +525,33 @@ describe('FOProductsSection screen', () => {
     expect(nextResponse.data).toBeUndefined();
     expect(nextResponse.isLoading).toBe(false);
     expect(nextResponse.isError).toBe(true);
+  });
+});
+```
+
+### :smiling_imp: Jest example to mock service response for component
+
+You can see the example in `src/components/organisms/__tests__/FOProductsSection.test.tsx` based on [this article](https://bionicjulia.com/blog/implementing-rtk-query-in-react-native-app).
+
+```javascript
+import React from 'react';
+import * as hooks from '../../../services/products';
+import FOProductsSection from '../FOProductsSection';
+import { render } from '../../../__mocks__/utils/wrapper';
+import { products } from '../../../__mocks__/testData';
+
+describe('FOProductsSection screen', () => {
+  it('can shows 4 data correctly', async () => {
+    jest.spyOn(hooks, 'useGetProductQuery').mockReturnValue({
+      data: products,
+      isError: false,
+      isLoading: false,
+      refetch: function (): void {
+        throw new Error('Function not implemented.');
+      },
+    });
+    const { findAllByTestId } = render(<FOProductsSection query={'Apple'} />);
+    expect((await findAllByTestId('FMProductsCard')).length).toBe(4);
   });
 });
 ```
