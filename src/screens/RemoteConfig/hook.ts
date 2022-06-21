@@ -27,7 +27,7 @@ export const useRemoteConfig = () => {
        */
       const activated = await remoteConfig().fetchAndActivate(); //can read remote data if true
       if (activated || isFetched === false) {
-        const values = await remoteConfig().getAll(); //returns all values set in remote
+        const values = remoteConfig().getAll(); //returns all values set in remote
         const configs = [];
         Object.entries(values).forEach(($) => {
           const [key, entry] = $;
