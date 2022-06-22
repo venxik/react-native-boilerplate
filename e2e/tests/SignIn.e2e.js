@@ -1,6 +1,7 @@
 describe('SignIn screen', () => {
   beforeAll(async () => {
     await device.launchApp({ permissions: { notifications: 'YES' } });
+    device.enableSynchronization();
   });
 
   it('should have signin screen', async () => {
