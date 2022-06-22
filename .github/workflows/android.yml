@@ -48,14 +48,14 @@ jobs:
       #     $ANDROID_HOME/platform-tools/adb devices
       #     echo "Emulator started"
 
-      - name: Install Java JDK
-        uses: joschi/setup-jdk@v1
-        with:
-          java-version: 'openjdk8'
-          architecture: 'x64'
-        env:
-          # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      # - name: Install Java JDK
+      #   uses: joschi/setup-jdk@v1
+      #   with:
+      #     java-version: 'openjdk8'
+      #     architecture: 'x64'
+      #   env:
+      #     # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
+      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - name: Run Detox Build
         run: yarn build:e2e-android-dev-debug
@@ -65,7 +65,7 @@ jobs:
         with:
           api-level: 30
           target: default
-          arch: x86_64
+          arch: arm64-v8a
           profile: pixel
           avd-name: Pixel_API_30_AOSP
           script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh

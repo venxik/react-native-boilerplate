@@ -4,7 +4,7 @@ yarn start &
 
 METRO_BUNDLER_PID=$!
 
-yarn test:e2e-ios-dev-debug --headless
+yarn test:e2e-android-dev-debug --headless
 
 DETOX_EXIT_CODE=$?
 
