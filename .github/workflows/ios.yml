@@ -29,14 +29,6 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Rebuild detox
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: yarn detox clean-framework-cache && yarn detox build-framework-cache
-
-      - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
-
       - name: Cache Pods
         uses: actions/cache@v1
         id: podcache
@@ -44,12 +36,19 @@ jobs:
           path: ios/Pods
           key: pods-${{ hashFiles('**/Podfile.lock') }}
 
-      - name: Update Pods
-        run: |
-          gem update cocoapods xcodeproj
-          cd ios && pod install && cd ..
+      - name: Install Yarn Dependencies
+        run: yarn install
 
-      - run: brew tap wix/brew
-      - run: brew install applesimutils
-      - run: yarn build:e2e-ios-dev-debug
-      - run: yarn test:e2e-ios-dev-debug
+      - name: Install Pod Dependencies
+        run: cd ./ios && pod install && cd ..
+
+      - name: Install Detox Dependencies
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: Run Detox Build
+        run: yarn build:e2e-ios-dev-debug
+
+      - name: Run Detox Test(s)
+        run: bash ${{ github.workspace }}/scripts/run-e2e-ios-release.sh

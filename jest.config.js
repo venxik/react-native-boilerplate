@@ -12,6 +12,7 @@ module.exports = {
     '<rootDir>/src/config/',
     '<rootDir>/src/global/',
     '<rootDir>/src/navigation/',
+    '<rootDir>/scripts/',
   ],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?@?react-native|react-native|@react-navigation/.*|@react-native-community/.*|native-base/.*)',
