@@ -81,6 +81,9 @@ jobs:
       #     # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
       #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
+      - name: Run Metro Bundler
+        run: yarn start --reset-cache
+
       - name: Run Detox Build
         run: yarn build:e2e-android-dev-debug
 
@@ -92,7 +95,11 @@ jobs:
           arch: x86_64
           profile: pixel
           avd-name: Pixel_API_30_AOSP
-          script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
+          script: ./gradlew connectedCheck
+          # script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
+
+      - name: Run Detox Test
+        run: yarn test:e2e-android-dev-debug --headless --debug-synchronization 500
 
       - name: Store Detox artifacts on test failure
         uses: actions/upload-artifact@v3
