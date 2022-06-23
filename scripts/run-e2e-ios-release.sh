@@ -4,6 +4,8 @@ yarn start &
 
 METRO_BUNDLER_PID=$!
 
+npx detox clean-framework-cache && npx detox build-framework-cache
+
 yarn test:e2e-ios-dev-debug --debug-synchronization 500
 
 DETOX_EXIT_CODE=$?
