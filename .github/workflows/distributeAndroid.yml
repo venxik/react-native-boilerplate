@@ -94,7 +94,7 @@ jobs:
         env:
           GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
 
-      - name: Distribute app with 🔥 App Distribution 🚀
+      - name: Distribute app with fastlane
         run: cd android && bundle exec fastlane beta
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
