@@ -95,7 +95,6 @@ jobs:
           arch: x86_64
           profile: pixel
           avd-name: Pixel_API_30_AOSP
-          script: ./gradlew connectedCheck
           script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
 
       # - name: Run Detox Test
