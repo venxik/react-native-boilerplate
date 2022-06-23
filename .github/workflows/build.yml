@@ -10,15 +10,15 @@ jobs:
     name: Check Commit Message
     runs-on: ubuntu-latest
     steps:
-      # - name: Check Commit Type
-      #   uses: gsactions/commit-message-checker@v1
-      #   with:
-      #     pattern: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([\w ]+\))?: [\w\-\/ ]+$'
-      #     flags: 'gm'
-      #     error: 'Your commit messages not follow the conventional commits'
-      #     excludeDescription: 'true'
-      #     checkAllCommitMessages: 'true'
-      #     accessToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check Commit Type
+        uses: gsactions/commit-message-checker@v1
+        with:
+          pattern: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([\w ]+\))?: [\w\-\/ ]+$'
+          flags: 'gm'
+          error: 'Your commit messages not follow the conventional commits'
+          excludeDescription: 'true'
+          checkAllCommitMessages: 'true'
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Check Line Length
         uses: gsactions/commit-message-checker@v1
         with:
