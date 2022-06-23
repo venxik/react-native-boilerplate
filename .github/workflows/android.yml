@@ -9,7 +9,7 @@ on:
 
 jobs:
   end-2-end-test:
-    name: e2e iOS test
+    name: e2e Android test
     runs-on: macos-latest
 
     steps:
@@ -81,8 +81,8 @@ jobs:
       #     # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
       #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
-      - name: Run Metro Bundler
-        run: yarn start --reset-cache
+      # - name: Run Metro Bundler
+      #   run: yarn start --reset-cache
 
       - name: Run Detox Build
         run: yarn build:e2e-android-dev-debug
@@ -96,10 +96,10 @@ jobs:
           profile: pixel
           avd-name: Pixel_API_30_AOSP
           script: ./gradlew connectedCheck
-          # script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
+          script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
 
-      - name: Run Detox Test
-        run: yarn test:e2e-android-dev-debug --headless --debug-synchronization 500
+      # - name: Run Detox Test
+      #   run: yarn test:e2e-android-dev-debug --headless --debug-synchronization 500
 
       - name: Store Detox artifacts on test failure
         uses: actions/upload-artifact@v3
