@@ -1,7 +1,6 @@
 describe('Home screen', () => {
   beforeAll(async () => {
     await device.launchApp({ permissions: { notifications: 'YES' } });
-    device.enableSynchronization();
   });
 
   it('can show users list', async () => {
