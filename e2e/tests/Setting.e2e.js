@@ -1,7 +1,6 @@
 describe('Setting screen', () => {
   beforeAll(async () => {
     await device.launchApp({ permissions: { notifications: 'YES' } });
-    device.enableSynchronization();
   });
 
   it('can show setting screen', async () => {

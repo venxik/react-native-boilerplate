@@ -1,7 +1,6 @@
 describe('SignUp screen', () => {
   beforeAll(async () => {
     await device.launchApp({ permissions: { notifications: 'YES' } });
-    device.enableSynchronization();
   });
 
   it('can input form values and click submit button', async () => {
