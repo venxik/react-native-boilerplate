@@ -1,33 +1,25 @@
+import crashlytics from '@react-native-firebase/crashlytics';
 import inAppMessaging from '@react-native-firebase/in-app-messaging';
-import { useNavigation } from '@react-navigation/native';
 import { Button } from 'native-base';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNotification } from '../../hooks';
+import { useSetting } from './hook';
 
 export default function Setting() {
-  const navigation = useNavigation();
-  const { displayNotification } = useNotification();
-
-  const handleDisplayNotification = async () => {
-    // Display notification
-    displayNotification('NotificationTitle', 'NotificationBody');
-  };
-
-  useEffect(() => {
-    // const installationsForDefaultApp = firebase.installations().getId();
-    // installationsForDefaultApp.then((res) => console.log(res)).catch((err) => console.log(err));
-    async function bootstrap() {
-      await inAppMessaging().setMessagesDisplaySuppressed(true);
-    }
-    bootstrap();
-  }, []);
+  const { navigation, handleDisplayNotification } = useSetting();
   return (
     <SafeAreaView
       style={{ flex: 1, padding: 20, justifyContent: 'center' }}
       testID="setting-screen"
     >
-      <Button onPress={() => navigation.navigate('RemoteConfigScreen')} testID="btn-remote-config">
+      <Button onPress={() => crashlytics().crash()} testID="btn-crashlytics">
+        Crashlytics Demo
+      </Button>
+      <Button
+        style={{ marginTop: 20 }}
+        onPress={() => navigation.navigate('RemoteConfigScreen')}
+        testID="btn-remote-config"
+      >
         Remote Config Demo
       </Button>
       <Button
