@@ -1,11 +1,11 @@
 name: Android
 
 on:
-  # push:
-  #   branches: [main, develop, hotfix/detox-github-action]
-  # pull_request:
-  #   types: [opened, synchronize, reopened]
-  workflow_dispatch:
+  push:
+    branches: [main, develop, hotfix/detox-github-action]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  # workflow_dispatch:
 
 jobs:
   end-2-end-test:
