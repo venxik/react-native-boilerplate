@@ -22,7 +22,6 @@ describe('Setting screen', () => {
   });
 
   it('can navigate show notification', async () => {
-    await element(by.id('setting-tab')).tap();
     await element(by.id('btn-notification')).tap();
   });
 });
