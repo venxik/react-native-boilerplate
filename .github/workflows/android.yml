@@ -96,6 +96,7 @@ jobs:
           profile: pixel
           avd-name: Pixel_API_30_AOSP
           script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
+          enable-hw-keyboard: true
 
       # - name: Run Detox Test
       #   run: yarn test:e2e-android-dev-debug --headless --debug-synchronization 500
