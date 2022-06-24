@@ -132,6 +132,7 @@ jobs:
           avd-name: Pixel_API_30_AOSP
           enable-hw-keyboard: true
           script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
+          enable-hw-keyboard: true
 
       - name: Store Detox artifacts on test failure
         uses: actions/upload-artifact@v3
