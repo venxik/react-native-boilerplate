@@ -18,11 +18,10 @@ describe('Setting screen', () => {
   it('can navigate to A/B testing demo', async () => {
     await element(by.id('btn-ab-testing')).tap();
     await expect(element(by.id('ab-testing-screen'))).toBeVisible();
+    await element(by.id('btn-back')).tap();
   });
 
   it('can navigate show notification', async () => {
-    await device.reloadReactNative();
-    await element(by.id('btn-submit')).tap();
     await element(by.id('setting-tab')).tap();
     await element(by.id('btn-notification')).tap();
   });
