@@ -26,7 +26,7 @@ jobs:
       - name: Select Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '12.5.1'
+          xcode-version: latest-stable
 
       - name: Cache node modules
         uses: actions/cache@v1
