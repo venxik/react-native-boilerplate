@@ -133,6 +133,7 @@ jobs:
           enable-hw-keyboard: true
           script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
           enable-hw-keyboard: true
+          script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
 
       - name: Store Detox artifacts on test failure
         uses: actions/upload-artifact@v3
