@@ -1,5 +1,4 @@
-import { initDatadogConfig } from './initDatadogConfig';
-
 export * from './firebase';
-
-export { initDatadogConfig };
+export * from './generic';
+export * from './initDatadogConfig';
+export * from './normalize';

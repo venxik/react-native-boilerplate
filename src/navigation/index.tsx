@@ -4,7 +4,7 @@ import { NavigationContainer, useNavigationContainerRef } from '@react-navigatio
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AddIcon, useTheme } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { ABTest1, Home, RemoteConfig, Setting, SignIn, SignUp, Splash } from '../screens';
+import { ABTest1, Home, RemoteConfig, Setting, SignIn, SignUp, Splash } from '@screens';
 import { DdRumReactNavigationTracking } from '@datadog/mobile-react-navigation';
 
 const SignInStack = createNativeStackNavigator<ReactNavigation.SignInStackParamList>();
@@ -127,4 +127,5 @@ function Router() {
   );
 }
 
+export * from './navigationService';
 export default Router;

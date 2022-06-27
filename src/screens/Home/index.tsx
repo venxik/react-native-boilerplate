@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Input } from 'native-base';
 import React, { useState } from 'react';
-import { FOProductsSection, FOUserSection } from '../../components';
-import { useDebounce } from '../../hooks';
+import { FOProductsSection, FOUserSection } from '@components/organisms';
+import { useDebounce } from '@hooks';
 import { useHome } from './hook';
 
 export default function Home(): JSX.Element {

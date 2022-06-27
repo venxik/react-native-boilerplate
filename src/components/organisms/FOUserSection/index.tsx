@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, ScrollView, Text } from 'native-base';
-import { useGetUserListQuery } from '../../../services';
-import { FMUsersCard } from '../../molecules';
+import { useGetUserListQuery } from '@services';
+import { FMUsersCard } from '@components/molecules';
 
 export default function FOUserSection(): JSX.Element {
   const { isFetching, data, error } = useGetUserListQuery();

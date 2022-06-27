@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, ScrollView, Text } from 'native-base';
-import { FMProductsCard } from '../../molecules';
-import { IProductsDetail, useGetProductQuery } from '../../../services/products';
+import { FMProductsCard } from '@components/molecules';
+import { IProductsDetail, useGetProductQuery } from '@services';
 
 type IFOProductsSectionProps = {
   query: string;

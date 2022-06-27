@@ -25,7 +25,23 @@
     "strictNullChecks": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
+      // ? Babel Plugin Module Resolver
+    "baseUrl": "./src",
+    "paths": {
+      "@assets": ["assets"],
+      "@components/atoms": ["components/atoms"],
+      "@components/molecules": ["components/molecules"],
+      "@components/organisms": ["components/organisms"],
+      "@config": ["config"],
+      "@hooks": ["hooks"],
+      "@navigation": ["navigation"],
+      "@reduxStore": ["reduxStore"],
+      "@screens": ["screens"],
+      "@services": ["services"],
+      "@theme": ["theme"],
+      "@utils": ["utils"],
+    }
   },
   "exclude": [
     "node_modules",
