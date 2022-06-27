@@ -1,5 +1,10 @@
 # :pushpin: React Native Boilerplate
 
+[![CD-Distribute Android to Firebase](https://github.com/venxik/react-native-boilerplate/actions/workflows/distributeAndroid.yml/badge.svg)](https://github.com/venxik/react-native-boilerplate/actions/workflows/distributeAndroid.yml)
+[![CI-Check Commit Message & SonarCloud](https://github.com/venxik/react-native-boilerplate/actions/workflows/build.yml/badge.svg)](https://github.com/venxik/react-native-boilerplate/actions/workflows/build.yml)
+[![CI-Android](https://github.com/venxik/react-native-boilerplate/actions/workflows/android.yml/badge.svg)](https://github.com/venxik/react-native-boilerplate/actions/workflows/android.yml)
+[![CI-iOS](https://github.com/venxik/react-native-boilerplate/actions/workflows/ios.yml/badge.svg)](https://github.com/venxik/react-native-boilerplate/actions/workflows/ios.yml)
+
 React Native boilerplate repository version 0.0.1
 
 ## ⚡️Getting Started
