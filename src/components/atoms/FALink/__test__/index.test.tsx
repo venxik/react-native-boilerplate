@@ -15,5 +15,4 @@ describe('FALink', () => {
 
     expect(getByText('Test')).toBeTruthy();
   });
-
 });
