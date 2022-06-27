@@ -1,4 +1,5 @@
-name: Build
+name: CI-Check Commit Message & SonarCloud
+
 on:
   push:
     branches: [main, develop]
@@ -30,7 +31,7 @@ jobs:
           accessToken: ${{ secrets.GITHUB_TOKEN }} # github access token is only required if checkAllCommitMessages is true
 
   sonarcloud:
-    name: SonarCloud
+    name: SonarCloud Code Check
     runs-on: ubuntu-latest
     steps:
       - name: Check out code into directory
@@ -38,7 +39,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18'
@@ -46,10 +47,10 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Test and coverage
+      - name: Test coverage
         run: yarn test:cov
 
-      - name: SonarCloud Scan
+      - name: SonarCloud scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any

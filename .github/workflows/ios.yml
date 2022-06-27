@@ -1,11 +1,11 @@
-name: iOS
+name: CI-iOS
 
 on:
   push:
     branches: [main, develop, hotfix/detox-github-action]
 
 jobs:
-  end-2-end-test:
+  e2e-test:
     name: e2e iOS test
     runs-on: macos-latest
 
@@ -25,7 +25,7 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      - name: Cache node modules
+      - name: Cache node_modules
         uses: actions/cache@v1
         id: cache
         with:
@@ -39,13 +39,13 @@ jobs:
           path: ios/Pods
           key: pods-${{ hashFiles('**/Podfile.lock') }}
 
-      - name: Install Yarn Dependencies
+      - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Install Pod Dependencies
+      - name: Install Pod dependencies
         run: cd ios && pod install && cd ..
 
-      - name: Install Detox Dependencies
+      - name: Install Detox dependencies
         run: |
           brew tap wix/brew
           brew install applesimutils
