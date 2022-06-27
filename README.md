@@ -1,5 +1,7 @@
 # :pushpin: React Native Boilerplate
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=venxik_react-native-boilerplate&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=venxik_react-native-boilerplate)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=venxik_react-native-boilerplate&metric=coverage)](https://sonarcloud.io/summary/new_code?id=venxik_react-native-boilerplate)
 [![CD-Distribute Android to Firebase](https://github.com/venxik/react-native-boilerplate/actions/workflows/distributeAndroid.yml/badge.svg)](https://github.com/venxik/react-native-boilerplate/actions/workflows/distributeAndroid.yml)
 [![CI-Check Commit Message & SonarCloud](https://github.com/venxik/react-native-boilerplate/actions/workflows/build.yml/badge.svg)](https://github.com/venxik/react-native-boilerplate/actions/workflows/build.yml)
 [![CI-Android](https://github.com/venxik/react-native-boilerplate/actions/workflows/android.yml/badge.svg)](https://github.com/venxik/react-native-boilerplate/actions/workflows/android.yml)
