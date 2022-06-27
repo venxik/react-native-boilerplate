@@ -15,6 +15,8 @@
     "android:local": "adb reverse tcp:8081 tcp:8081",
     "start": "react-native start --reset-cache",
     "release": "release-it",
+    "release:minor": "release-it -i minor",
+    "release:patch": "release-it -i patch",
     "test": "jest --verbose",
     "test:cov": "jest --verbose --coverage",
     "test:update": "jest --verbose --coverage --updateSnapshot",
@@ -90,6 +92,7 @@
     "@commitlint/config-conventional": "^17.0.2",
     "@jest/types": "^28.1.0",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@release-it/conventional-changelog": "^5.0.0",
     "@testing-library/react-hooks": "^8.0.0",
     "@testing-library/react-native": "^9.1.0",
     "@types/jest": "^26.0.24",
@@ -122,6 +125,7 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "^17.0.0",
     "redux-flipper": "^2.0.1",
+    "release-it": "^15.1.0",
     "ts-jest": "^28.0.3",
     "typescript": "^4.7.2",
     "whatwg-fetch": "^3.6.2"
@@ -133,5 +137,22 @@
     "node": ">=14",
     "yarn": ">= 1.22",
     "npm": "Please use Yarn"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular"
+      }
+    }
   }
 }
