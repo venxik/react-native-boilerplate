@@ -13,7 +13,7 @@ describe('FAButton', () => {
   it('should render with children prop', () => {
     const { getByText } = render(<FAButton testID="button-example">Test</FAButton>);
 
-    expect(getByText('hey')).toBeTruthy();
+    expect(getByText('Test')).toBeTruthy();
   });
 
   it('should increment number on click', () => {
