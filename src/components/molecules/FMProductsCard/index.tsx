@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Box, Image, Pressable, HStack } from 'native-base';
-import { heightPercentageToDP } from '../../../utils/normalize';
+import { heightPercentageToDP } from '@utils';
 
 type ProductsCardProps = {
   image: string;

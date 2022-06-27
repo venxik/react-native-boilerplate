@@ -1,4 +1,25 @@
 {
   "presets": ["module:metro-react-native-babel-preset"],
-  "plugins": ["react-native-reanimated/plugin"]
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": [
+          { "@assets": "./src/assets" },
+          { "@components/atoms": "./src/components/atoms" },
+          { "@components/molecules": "./src/components/molecules" },
+          { "@components/organisms": "./src/components/organisms" },
+          { "@config": "./src/config" },
+          { "@hooks": "./src/hooks" },
+          { "@navigation": "./src/navigation" },
+          { "@reduxStore": "./src/reduxStore" },
+          { "@screens": "./src/screens" },
+          { "@services": "./src/services" },
+          { "@theme": "./src/theme" },
+          { "@utils": "./src/utils" }
+        ]
+      }
+    ],
+    "react-native-reanimated/plugin"
+  ]
 }

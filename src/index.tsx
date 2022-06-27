@@ -4,11 +4,11 @@ import { NativeBaseProvider } from 'native-base';
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { useLayout, useNotification } from './hooks';
-import Router from './navigation';
-import { persistor, store } from './redux';
-import { themes } from './theme';
-import { fetchConfig } from './utils';
+import { useLayout, useNotification } from '@hooks';
+import Router from '@navigation';
+import { persistor, store } from '@reduxStore';
+import { themes } from '@theme';
+import { fetchConfig } from '@utils';
 import { utils } from '@react-native-firebase/app';
 import analytics from '@react-native-firebase/analytics';
 

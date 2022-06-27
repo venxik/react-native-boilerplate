@@ -1,7 +1,7 @@
 import inAppMessaging from '@react-native-firebase/in-app-messaging';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
-import { useNotification } from '../../hooks';
+import { useNotification } from '@hooks';
 
 export const useSetting = () => {
   //STATE

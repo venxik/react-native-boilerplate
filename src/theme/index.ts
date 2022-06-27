@@ -6,4 +6,4 @@ import baseStyle from './baseStyle';
 
 const themes = extendTheme({ colors, fontSizes, letterSpacings, components });
 
-export { themes, baseStyle };
+export { themes, baseStyle, colors, fontSizes, letterSpacings };
