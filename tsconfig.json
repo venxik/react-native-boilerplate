@@ -30,9 +30,7 @@
     "baseUrl": "./src",
     "paths": {
       "@assets": ["assets"],
-      "@components/atoms": ["components/atoms"],
-      "@components/molecules": ["components/molecules"],
-      "@components/organisms": ["components/organisms"],
+      "@components/*": ["components"],
       "@config": ["config"],
       "@hooks": ["hooks"],
       "@navigation": ["navigation"],
